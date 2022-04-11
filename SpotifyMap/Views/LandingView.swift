@@ -1,6 +1,9 @@
 import SwiftUI
 
 struct LandingView: View {
+    
+    @State private var isViewingSpotifyAuth = false
+    
     var body: some View {
         VStack {
             Text("LOGO")
@@ -16,7 +19,23 @@ struct LandingView: View {
                     .resizable()
                     .scaledToFit()
                     .frame(width: 200, height: 70)
+            }.onTapGesture {
+                isViewingSpotifyAuth = true
             }
+            .sheet(isPresented: $isViewingSpotifyAuth) {
+                Button(action: { isViewingSpotifyAuth = false }, label: {
+                    Image(systemName: "arrow.down")
+                        .font(.system(size: 30))
+                })
+                .foregroundColor(.black)
+                .padding(.top)
+                
+                SpotifyAuthView()
+            }
+            
+            //.sheet(isPresented: $isViewingSpotifyAuth) {
+            //    SpotifyAuthView().padding(.top, 50)
+            //}
             
             Spacer()
             Spacer()
