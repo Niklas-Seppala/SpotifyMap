@@ -11,6 +11,10 @@
 		6AC49688280489D6007EC954 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AC49687280489D6007EC954 /* ContentView.swift */; };
 		6AC4968A280489D8007EC954 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6AC49689280489D8007EC954 /* Assets.xcassets */; };
 		6AC4968D280489D8007EC954 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6AC4968C280489D8007EC954 /* Preview Assets.xcassets */; };
+		6AC496972804925A007EC954 /* Background.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AC4969628049259007EC954 /* Background.swift */; };
+		6AC4969A280492D0007EC954 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AC49699280492D0007EC954 /* Color.swift */; };
+		6AC4969D28049435007EC954 /* ShadowRect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AC4969C28049435007EC954 /* ShadowRect.swift */; };
+		6AC4969F28049600007EC954 /* LandingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AC4969E28049600007EC954 /* LandingView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -19,6 +23,10 @@
 		6AC49687280489D6007EC954 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		6AC49689280489D8007EC954 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		6AC4968C280489D8007EC954 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		6AC4969628049259007EC954 /* Background.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Background.swift; sourceTree = "<group>"; };
+		6AC49699280492D0007EC954 /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
+		6AC4969C28049435007EC954 /* ShadowRect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShadowRect.swift; sourceTree = "<group>"; };
+		6AC4969E28049600007EC954 /* LandingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LandingView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -51,10 +59,12 @@
 		6AC49684280489D6007EC954 /* SpotifyMap */ = {
 			isa = PBXGroup;
 			children = (
-				6AC49685280489D6007EC954 /* SpotifyMapApp.swift */,
-				6AC49687280489D6007EC954 /* ContentView.swift */,
-				6AC49689280489D8007EC954 /* Assets.xcassets */,
+				6AC49698280492B8007EC954 /* Utils */,
 				6AC4968B280489D8007EC954 /* Preview Content */,
+				6AC496942804920B007EC954 /* Services */,
+				6AC49693280491F4007EC954 /* Views */,
+				6AC49685280489D6007EC954 /* SpotifyMapApp.swift */,
+				6AC49689280489D8007EC954 /* Assets.xcassets */,
 			);
 			path = SpotifyMap;
 			sourceTree = "<group>";
@@ -65,6 +75,40 @@
 				6AC4968C280489D8007EC954 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		6AC49693280491F4007EC954 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				6AC4969B28049403007EC954 /* Subviews */,
+				6AC49687280489D6007EC954 /* ContentView.swift */,
+				6AC4969E28049600007EC954 /* LandingView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		6AC496942804920B007EC954 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		6AC49698280492B8007EC954 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				6AC49699280492D0007EC954 /* Color.swift */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
+		6AC4969B28049403007EC954 /* Subviews */ = {
+			isa = PBXGroup;
+			children = (
+				6AC4969628049259007EC954 /* Background.swift */,
+				6AC4969C28049435007EC954 /* ShadowRect.swift */,
+			);
+			path = Subviews;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -137,8 +181,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6AC4969F28049600007EC954 /* LandingView.swift in Sources */,
 				6AC49688280489D6007EC954 /* ContentView.swift in Sources */,
 				6AC49686280489D6007EC954 /* SpotifyMapApp.swift in Sources */,
+				6AC496972804925A007EC954 /* Background.swift in Sources */,
+				6AC4969A280492D0007EC954 /* Color.swift in Sources */,
+				6AC4969D28049435007EC954 /* ShadowRect.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
