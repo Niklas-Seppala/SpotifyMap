@@ -19,6 +19,7 @@
 		6AC496A428049997007EC954 /* SpotifyApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AC496A328049997007EC954 /* SpotifyApi.swift */; };
 		6AC496A6280499BA007EC954 /* BackendApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AC496A5280499BA007EC954 /* BackendApi.swift */; };
 		6AC496AA2804A0FE007EC954 /* SpotifyAuthView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AC496A92804A0FE007EC954 /* SpotifyAuthView.swift */; };
+		6AD78A51280573320038D67F /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AD78A50280573320038D67F /* HomeView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -35,6 +36,7 @@
 		6AC496A328049997007EC954 /* SpotifyApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotifyApi.swift; sourceTree = "<group>"; };
 		6AC496A5280499BA007EC954 /* BackendApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackendApi.swift; sourceTree = "<group>"; };
 		6AC496A92804A0FE007EC954 /* SpotifyAuthView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotifyAuthView.swift; sourceTree = "<group>"; };
+		6AD78A50280573320038D67F /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -91,6 +93,7 @@
 				6AC4969B28049403007EC954 /* Subviews */,
 				6AC49687280489D6007EC954 /* ContentView.swift */,
 				6AC4969E28049600007EC954 /* LandingView.swift */,
+				6AD78A50280573320038D67F /* HomeView.swift */,
 				6AC496A92804A0FE007EC954 /* SpotifyAuthView.swift */,
 			);
 			path = Views;
@@ -206,6 +209,7 @@
 				6AC4969F28049600007EC954 /* LandingView.swift in Sources */,
 				6AC49688280489D6007EC954 /* ContentView.swift in Sources */,
 				6AC496A428049997007EC954 /* SpotifyApi.swift in Sources */,
+				6AD78A51280573320038D67F /* HomeView.swift in Sources */,
 				6AC49686280489D6007EC954 /* SpotifyMapApp.swift in Sources */,
 				6AC496972804925A007EC954 /* Background.swift in Sources */,
 				6AC4969A280492D0007EC954 /* Color.swift in Sources */,
