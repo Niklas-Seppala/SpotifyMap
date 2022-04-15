@@ -19,9 +19,6 @@ struct HomeView: View {
                         Image(systemName: "plus")
                             .font(.system(size: 28))
                     }
-                    NavigationLink(destination: LandingView()) {
-                        
-                    }
                     CircleButton(xOffset: geometry.size.width - 38, yOffset: -109) {
                         Image(systemName: "location.fill")
                             .font(.system(size: 22))
