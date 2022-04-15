@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1F4649DC2809980D00B7AA3D /* SongList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F4649DB2809980D00B7AA3D /* SongList.swift */; };
 		6AC49686280489D6007EC954 /* SpotifyMapApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AC49685280489D6007EC954 /* SpotifyMapApp.swift */; };
 		6AC49688280489D6007EC954 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AC49687280489D6007EC954 /* ContentView.swift */; };
 		6AC4968A280489D8007EC954 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6AC49689280489D8007EC954 /* Assets.xcassets */; };
@@ -23,6 +24,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1F4649DB2809980D00B7AA3D /* SongList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SongList.swift; sourceTree = "<group>"; };
 		6AC49682280489D6007EC954 /* SpotifyMap.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SpotifyMap.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6AC49685280489D6007EC954 /* SpotifyMapApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotifyMapApp.swift; sourceTree = "<group>"; };
 		6AC49687280489D6007EC954 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -121,6 +123,7 @@
 			children = (
 				6AC4969628049259007EC954 /* Background.swift */,
 				6AC4969C28049435007EC954 /* ShadowRect.swift */,
+				1F4649DB2809980D00B7AA3D /* SongList.swift */,
 			);
 			path = Subviews;
 			sourceTree = "<group>";
@@ -204,6 +207,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1F4649DC2809980D00B7AA3D /* SongList.swift in Sources */,
 				6AC496A128049968007EC954 /* Authentication.swift in Sources */,
 				6AC496AA2804A0FE007EC954 /* SpotifyAuthView.swift in Sources */,
 				6AC4969F28049600007EC954 /* LandingView.swift in Sources */,

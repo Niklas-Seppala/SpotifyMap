@@ -58,6 +58,7 @@ struct LandingView: View {
             Spacer()
         }
         .tint(.green)
+        .preferredColorScheme(.dark)
     }
 }
 
