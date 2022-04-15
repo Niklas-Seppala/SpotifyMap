@@ -36,7 +36,7 @@ struct SongCard: View {
 
 struct SongList: View {
     var body: some View {
-        ScrollView (.horizontal) {
+        ScrollView (.horizontal, showsIndicators: false) {
             HStack {
                 ForEach(0...4, id: \.self) {index in
                     Spacer()
