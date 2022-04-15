@@ -14,7 +14,7 @@ struct HomeView: View {
             GeometryReader{ geometry in
                 VStack(spacing: 0){
                     MapView()
-                        .frame(height:geometry.size.height - 380)
+                        .frame(height:geometry.size.height - 390)
                     Text("The Sound of X")
                         .frame(width:geometry.size.width, alignment: .center)
                         .font(.title2)

@@ -1,18 +1,33 @@
 import SwiftUI
 
 struct SongCard: View {
+    let songName = "Hotel Room Service"
+    let musician = "Pitbull"
+    let albumName = "Rebelution"
+    
     var body: some View {
         VStack(alignment: .leading) {
             Image("AlbumCoverPlaceholder")
                 .resizable()
                 .scaledToFit()
                 .frame(width: 220, height: 220)
-            Text("Hotel Room Service")
+            Text(songName)
                 .fontWeight(.bold)
-            Text("Pitbull")
-                .font(.callout)
-            Text("Rebelution")
-                .font(.callout)
+                .padding(.horizontal, 5)
+            HStack() {
+                VStack(alignment: .leading) {
+                    Text(musician)
+                        .font(.callout)
+                    Text(albumName)
+                        .font(.callout)
+                }
+                .frame(width: 160, alignment: .leading)
+                Image("SpotifyLogoNoText")
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 40, height: 40)
+            }
+            .padding(.horizontal, 5)
         }
         .frame(width: 220, height: 320, alignment: .topLeading)
         .background(Color.black.opacity(0.3))

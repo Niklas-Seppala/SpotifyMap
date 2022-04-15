@@ -153,6 +153,8 @@
 			dependencies = (
 			);
 			name = SpotifyMap;
+			packageProductDependencies = (
+			);
 			productName = SpotifyMap;
 			productReference = 6AC49682280489D6007EC954 /* SpotifyMap.app */;
 			productType = "com.apple.product-type.application";
@@ -181,6 +183,8 @@
 				Base,
 			);
 			mainGroup = 6AC49679280489D6007EC954;
+			packageReferences = (
+			);
 			productRefGroup = 6AC49683280489D6007EC954 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
