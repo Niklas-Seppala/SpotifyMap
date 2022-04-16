@@ -1,33 +1,32 @@
 import SwiftUI
 import MapKit
+import CoreLocationUI
 
-struct MapView: View {
-    @StateObject private var viewModel = MapViewModel()
-    
-    var body: some View {
-        Map(coordinateRegion: $viewModel.region, showsUserLocation: true)
-            .onAppear {
-                viewModel.checkIfLocationServicesIsEnabled()
-            }
-    }
-}
 
 struct HomeView: View {
+    @StateObject var viewModel = MapViewModel()
+    
     var body: some View {
         Background {
             GeometryReader { geometry in
                 VStack(spacing: 0){
-                    MapView()
+                    Map(coordinateRegion: $viewModel.region, showsUserLocation: true)
                         .frame(height: geometry.size.height - 390)
                     CircleButton(xOffset: geometry.size.width - 38, yOffset: -38) {
                         Image(systemName: "plus")
                             .font(.system(size: 28))
                     }
-                    CircleButton(xOffset: geometry.size.width - 38, yOffset: -109) {
-                        Image(systemName: "location.fill")
-                            .font(.system(size: 22))
+                    LocationButton(.currentLocation) {
+                        viewModel.requestLocationPermission()
                     }
-                    Text("The Sound of X")
+                    .clipShape(Circle())
+                    .position(x: geometry.size.width - 38, y: -109)
+                    .zIndex(2)
+                    .foregroundColor(.white)
+                    .labelStyle(.iconOnly)
+                    .tint(Color(hex: 0x221c48))
+                   
+                    Text("The Sound of \(viewModel.regionName)")
                         .frame(width: geometry.size.width, alignment: .center)
                         .font(.title2)
                         .padding(.vertical, 12)

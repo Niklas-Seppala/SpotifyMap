@@ -1,10 +1,3 @@
-//
-//  MapViewModel.swift
-//  SpotifyMap
-//
-//  Created by iosdev on 16.4.2022.
-//
-
 import MapKit
 
 enum MapDetails {
@@ -16,43 +9,34 @@ class MapViewModel: NSObject, ObservableObject,
                                 CLLocationManagerDelegate {
     
     @Published var region = MKCoordinateRegion(center: MapDetails.startingLocation, span: MapDetails.defaulSpan)
+    let locationManager = CLLocationManager()
+    var regionName = ""
     
-    var locationManager: CLLocationManager?
+    override init() {
+        super.init()
+        locationManager.delegate = self
+    }
     
-    func checkIfLocationServicesIsEnabled() {
-        if CLLocationManager.locationServicesEnabled() {
+    func requestLocationPermission() {
+        locationManager.requestLocation()
+    }
     
-
-            locationManager = CLLocationManager()
-            locationManager!.delegate = self
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        guard let location = locations.first else {
+            return
+        }
+        
+        DispatchQueue.main.async {
+            self.region = MKCoordinateRegion(center: location.coordinate, span: MapDetails.defaulSpan)
+        }
+        
+        resolveRegionName(with: location) { [weak self] locationName in
+            self?.regionName = locationName ?? "none"
         }
     }
     
-   private func checkLocationAuthorization() {
-        guard let locationManager = locationManager else {
-            return
-        }
-        switch locationManager.authorizationStatus {
-            
-        case .notDetermined:
-            locationManager.requestWhenInUseAuthorization()
-        case .restricted:
-            print("location restircted")
-        case .denied:
-            print("location denied")
-        case .authorizedAlways, .authorizedWhenInUse:
-            region = MKCoordinateRegion(center: locationManager.location!.coordinate, span: MapDetails.defaulSpan)
-            print(region.center.longitude, region.center.latitude)
-            
-            let location = CLLocation(latitude: region.center.latitude, longitude: region.center.longitude)
-            resolveRegionName(with: location) { [weak self] locationName in
-                // self?.title = locationName
-                print("Current location: ", locationName ?? "none")
-            }
-
-        @unknown default:
-            break
-        }
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+        print(error.localizedDescription)
     }
     
     func resolveRegionName(with location: CLLocation, completion: @escaping ((String?) -> Void)) {
@@ -60,7 +44,7 @@ class MapViewModel: NSObject, ObservableObject,
 
         geoCoder.reverseGeocodeLocation(location) {placemarks, error in
             guard let placemark = placemarks?.first, error == nil else {return}
-            print(placemarks ?? "no pm")
+            print(placemarks ?? "none")
             
             var stName = ""
             
@@ -72,9 +56,5 @@ class MapViewModel: NSObject, ObservableObject,
             completion(stName)
         }
         
-    }
-    
-    func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
-        checkLocationAuthorization()
     }
 }
