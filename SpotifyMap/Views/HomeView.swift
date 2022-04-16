@@ -2,9 +2,13 @@ import SwiftUI
 import MapKit
 
 struct MapView: View {
-    @State var region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 60.223_063, longitude: 24.758_801), latitudinalMeters: 750, longitudinalMeters: 750)
+    @StateObject private var viewModel = MapViewModel()
+    
     var body: some View {
-        Map(coordinateRegion: $region)
+        Map(coordinateRegion: $viewModel.region, showsUserLocation: true)
+            .onAppear {
+                viewModel.checkIfLocationServicesIsEnabled()
+            }
     }
 }
 
