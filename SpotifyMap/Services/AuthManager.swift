@@ -8,8 +8,8 @@ class AuthManager: ObservableObject {
     
     struct Secrets {
         // For Spotify application.
-        static let CLIENT_ID = "d066f02f40af4ea080a5ee47403f89ca"
-        static let CLIENT_SECRET = "4693f90616294b91b380670c18c91702"
+        static let CLIENT_ID = ""
+        static let CLIENT_SECRET = ""
     }
     
     struct Keys {
