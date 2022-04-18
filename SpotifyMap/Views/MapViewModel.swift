@@ -23,7 +23,7 @@ class MapViewModel: NSObject, ObservableObject,
         }
         
         resolveRegionName(with: location) { [weak self] locationName in
-            self?.regionName = locationName ?? "(no name)"
+            self?.regionName = locationName ?? "(unknown)"
         }
     }
     
@@ -48,13 +48,17 @@ class MapViewModel: NSObject, ObservableObject,
             print("location restircted")
         case .denied:
             print("location denied")
+            let location = CLLocation(latitude: 60.224305, longitude: 24.757239)
+            resolveRegionName(with: location) { [weak self] locationName in
+                self?.regionName = locationName ?? "(unknown)"
+            }
         case .authorizedAlways, .authorizedWhenInUse:
             region = MKCoordinateRegion(center: locationManager.location!.coordinate, span: MapDetails.defaulSpan)
             print(region.center.longitude, region.center.latitude)
             
             let location = CLLocation(latitude: region.center.latitude, longitude: region.center.longitude)
             resolveRegionName(with: location) { [weak self] locationName in
-                self?.regionName = locationName ?? "(no name)"
+                self?.regionName = locationName ?? "(unknown)"
             }
 
         @unknown default:
@@ -68,13 +72,14 @@ class MapViewModel: NSObject, ObservableObject,
         geoCoder.reverseGeocodeLocation(location) {placemarks, error in
             guard let placemark = placemarks?.first, error == nil else {return}
             
-            var stName = ""
+            var regionName = ""
             
-            if let street = placemark.thoroughfare {
-                stName = street
+            if let location = placemark.subLocality {
+                regionName = location
+                
             }
             
-            completion(stName)
+            completion(regionName)
         }
     }
     
