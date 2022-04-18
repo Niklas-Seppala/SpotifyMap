@@ -11,13 +11,16 @@ struct HomeView: View {
             GeometryReader { geometry in
                 VStack(spacing: 0){
                     Map(coordinateRegion: $viewModel.region, showsUserLocation: true)
+                        .onAppear {
+                            viewModel.checkIfLocationServicesIsEnabled()
+                        }
                         .frame(height: geometry.size.height - 390)
                     CircleButton(xOffset: geometry.size.width - 38, yOffset: -38) {
                         Image(systemName: "plus")
                             .font(.system(size: 28))
                     }
                     LocationButton(.currentLocation) {
-                        viewModel.requestLocationPermission()
+                        viewModel.checkIfLocationServicesIsEnabled()
                     }
                     .clipShape(Circle())
                     .position(x: geometry.size.width - 38, y: -109)
