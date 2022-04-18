@@ -1,39 +1,38 @@
 import SwiftUI
 import MapKit
+import CoreLocationUI
 
-struct MapView: View {
-    @State var region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 60.223_063, longitude: 24.758_801), latitudinalMeters: 750, longitudinalMeters: 750)
-    var body: some View {
-        Map(coordinateRegion: $region)
-    }
-}
 
 struct HomeView: View {
+    @StateObject var viewModel = MapViewModel()
     @ObservedObject var authManager: AuthManager
     
     var body: some View {
-#if DEBUG
-        let _ = print("HOME VIEW")
-        let _ = print("    Signed in as anonymous: \(authManager.isAnonymous)")
-        let _ = print("    Signed in with Spotify: \(authManager.isSignedIn)")
-#endif
-        
         NavigationView {
             Background {
                 GeometryReader { geometry in
                     VStack(spacing: 0){
-                        MapView()
+                        Map(coordinateRegion: $viewModel.region, showsUserLocation: true)
+                            .onAppear {
+                                viewModel.checkIfLocationServicesIsEnabled()
+                            }
                             .frame(height: geometry.size.height - 390)
                         CircleButton(xOffset: geometry.size.width - 38, yOffset: -38) {
                             Image(systemName: "plus")
                                 .font(.system(size: 28))
                         }
-                        CircleButton(xOffset: geometry.size.width - 38, yOffset: -109) {
-                            Image(systemName: "location.fill")
-                                .font(.system(size: 22))
+                        LocationButton(.currentLocation) {
+                            viewModel.checkIfLocationServicesIsEnabled()
                         }
-                        Text("The Sound of X")
-                            .frame(width: geometry.size.width, alignment: .center)
+                        .clipShape(Circle())
+                        .position(x: geometry.size.width - 38, y: -109)
+                        .zIndex(2)
+                        .foregroundColor(.white)
+                        .labelStyle(.iconOnly)
+                        .tint(Color(hex: 0x221c48))
+                    
+                        Text("The Sound of \(viewModel.regionName)")
+                                .frame(width: geometry.size.width, alignment: .center)
                             .font(.title2)
                             .padding(.vertical, 12)
                             .background(Color.black.opacity(0.3))
@@ -41,9 +40,9 @@ struct HomeView: View {
                         SongList()
                     }
                 }
+                .edgesIgnoringSafeArea(.top)
+                .navigationBarBackButtonHidden(true)
             }
-            .edgesIgnoringSafeArea(.top)
-            .navigationBarBackButtonHidden(true)
         }
     }
 }
