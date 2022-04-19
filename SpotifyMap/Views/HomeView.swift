@@ -25,6 +25,7 @@ struct HomeView: View {
                             viewModel.checkIfLocationServicesIsEnabled()
                         }
                         .clipShape(Circle())
+                        .font(.system(size: 25))
                         .position(x: geometry.size.width - 38, y: -109)
                         .zIndex(2)
                         .foregroundColor(.white)
