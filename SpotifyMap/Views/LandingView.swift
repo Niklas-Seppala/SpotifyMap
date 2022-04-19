@@ -1,48 +1,34 @@
 import SwiftUI
 
 struct LandingView: View {
-    
-    @State private var isViewingSpotifyAuth = false
+    @ObservedObject var authManager: AuthManager
+    @State var displayWeb = false
     
     var body: some View {
         VStack {
             Text("LOGO")
                 .font(.system(size: 60))
-            
             Spacer()
             
-            ShadowRect(height: 260) {
+            // Spotify login.
+            ShadowRect(height: 250) {
                 Text("Connect your")
                     .font(.system(size: 30))
-                
+                    
                 Image("SpotifyLogo")
                     .resizable()
                     .scaledToFit()
                     .frame(width: 200, height: 70)
-            }.onTapGesture {
-                isViewingSpotifyAuth = true
+            }.onTapGesture { displayWeb = true }
+            .sheet(isPresented: $displayWeb) {
+                SpotifyAuthView(authManager: authManager)
             }
-            .sheet(isPresented: $isViewingSpotifyAuth) {
-                Button(action: { isViewingSpotifyAuth = false }, label: {
-                    Image(systemName: "arrow.down")
-                        .font(.system(size: 30))
-                })
-                .foregroundColor(.black)
-                .padding(.top)
-                
-                SpotifyAuthView()
-            }
-            
-            //.sheet(isPresented: $isViewingSpotifyAuth) {
-            //    SpotifyAuthView().padding(.top, 50)
-            //}
             
             Spacer()
             Spacer()
             
-            NavigationLink(destination: HomeView()) {
-                ShadowRect(height: 250) {
-                
+            // Guest login.
+            ShadowRect(height: 250) {
                 Text("Continue as a guest")
                     .font(.title)
                 Text("with limited features")
@@ -52,9 +38,11 @@ struct LandingView: View {
                     .resizable()
                     .scaledToFit()
                     .frame(width: 50, height: 50)
+            }.onTapGesture {
+                withAnimation {
+                    authManager.isAnonymous = true
                 }
             }
-
             Spacer()
         }
         .tint(.green)
@@ -65,7 +53,7 @@ struct LandingView: View {
 struct LandingView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
-            LandingView()
+            LandingView(authManager: AuthManager())
         }
     }
 }

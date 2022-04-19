@@ -1,8 +1,7 @@
-//
-//  SpotifyApi.swift
-//  SpotifyMap
-//
-//  Created by iosdev on 11.4.2022.
-//
-
 import Foundation
+
+struct SpotifyURL {
+    static let AUTHENTICATE = "https://accounts.spotify.com/authorize"
+    static let TOKEN_REQUEST = "https://accounts.spotify.com/api/token"
+    static let REDIRECT = "https://github.com/Niklas-Seppala/SpotifyMap"
+}
