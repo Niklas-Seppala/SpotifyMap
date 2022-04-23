@@ -9,25 +9,27 @@ import Foundation
 import SwiftUI
 
 func createTopToast(toastText: String) -> some View {
-    VStack(alignment: .leading) {
-        //Rectangle().frame(height: 5)
-        HStack(alignment: .center) {
-            Rectangle()
-                .fill(Color(hex:0x1ED760))
-                .frame(maxWidth: 20, maxHeight:.infinity, alignment: .leading)
-            VStack(alignment: .leading) {
+    GeometryReader { geometry in
+        VStack(alignment: .center) {
+            HStack(alignment: .center) {
+                Rectangle()
+                    .fill(Color(hex:0x1ED760))
+                    .frame(maxWidth: 4, maxHeight: 50, alignment: .leading)
+                VStack(alignment: .leading) {
                     Text(toastText)
-                        .lineLimit(10)
+                        .lineLimit(5)
                         .font(.system(size: 14))
                         .foregroundColor(.white)
                     
+                }
+                Spacer()
             }
-            Spacer()
+            .frame(width: geometry.size.width - 40, height: 70)
+            .background(Color(hex: 0x221c48))
+            .cornerRadius(15)
+            .padding(.top, 50)
+            .padding(.leading, 20)
         }
-        .frame(height: 125)
-        .frame(maxWidth: .infinity)
-        .background(Color(hex: 0x221c48))
-        .cornerRadius(15)
     }
 }
 
