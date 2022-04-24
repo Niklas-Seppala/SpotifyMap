@@ -51,20 +51,19 @@ class RequestManager: ObservableObject {
         }
         guard let url = URL(string: "http://10.114.34.4/app/app/location/\"\(area.replacingOccurrences(of: "ä", with: "a"))\"".replacingOccurrences(of: "\"", with: "")) else {
             print("invalid url")
-            DispatchQueue.main.async {
-                self.isLoading = false
-            }
             return
         }
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
-        URLSession.shared.dataTask(with: request) { (data, response, error) in
-            guard let data = data else {return}
-            let response = try! JSONDecoder().decode(FetchResponse.self, from: data)
-            DispatchQueue.main.async {
-                self.songs = response.songs
-                self.isLoading = false
-            }
-        }.resume()
+        DispatchQueue.main.async {
+            URLSession.shared.dataTask(with: request) { (data, response, error) in
+                guard let data = data else {return}
+                let response = try! JSONDecoder().decode(FetchResponse.self, from: data)
+                DispatchQueue.main.async {
+                    self.songs = response.songs
+                }
+            }.resume()
+            self.isLoading = false
+        }
     }
 }
