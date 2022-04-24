@@ -12,6 +12,8 @@
 		6A3AC172280D5E9B005A80C8 /* AuthResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A3AC171280D5E9B005A80C8 /* AuthResponse.swift */; };
 		6A4F8555280DA02200DF8028 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A4F8554280DA02200DF8028 /* LoadingView.swift */; };
 		6A4F8557280DC03800DF8028 /* Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A4F8556280DC03800DF8028 /* Errors.swift */; };
+		6A532ADC281005C000C1DFF4 /* PopupView in Frameworks */ = {isa = PBXBuildFile; productRef = 6A532ADB281005C000C1DFF4 /* PopupView */; };
+		6A532ADE2810090100C1DFF4 /* ToastUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A532ADD2810090100C1DFF4 /* ToastUtils.swift */; };
 		6A9302BE280AEB5D00065F2F /* MapViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A9302BD280AEB5D00065F2F /* MapViewModel.swift */; };
 		6AC49686280489D6007EC954 /* SpotifyMapApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AC49685280489D6007EC954 /* SpotifyMapApp.swift */; };
 		6AC49688280489D6007EC954 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AC49687280489D6007EC954 /* ContentView.swift */; };
@@ -35,6 +37,7 @@
 		6A3AC171280D5E9B005A80C8 /* AuthResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthResponse.swift; sourceTree = "<group>"; };
 		6A4F8554280DA02200DF8028 /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
 		6A4F8556280DC03800DF8028 /* Errors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Errors.swift; sourceTree = "<group>"; };
+		6A532ADD2810090100C1DFF4 /* ToastUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToastUtils.swift; sourceTree = "<group>"; };
 		6A9302BD280AEB5D00065F2F /* MapViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewModel.swift; sourceTree = "<group>"; };
 		6AC49682280489D6007EC954 /* SpotifyMap.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SpotifyMap.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6AC49685280489D6007EC954 /* SpotifyMapApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotifyMapApp.swift; sourceTree = "<group>"; };
@@ -59,6 +62,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6A532ADC281005C000C1DFF4 /* PopupView in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -128,6 +132,7 @@
 		6AC496942804920B007EC954 /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				6A532ADD2810090100C1DFF4 /* ToastUtils.swift */,
 				6AC496A228049976007EC954 /* Api */,
 				6AC496A028049968007EC954 /* AuthManager.swift */,
 			);
@@ -181,6 +186,7 @@
 			);
 			name = SpotifyMap;
 			packageProductDependencies = (
+				6A532ADB281005C000C1DFF4 /* PopupView */,
 			);
 			productName = SpotifyMap;
 			productReference = 6AC49682280489D6007EC954 /* SpotifyMap.app */;
@@ -212,6 +218,7 @@
 			);
 			mainGroup = 6AC49679280489D6007EC954;
 			packageReferences = (
+				6A532ADA281005C000C1DFF4 /* XCRemoteSwiftPackageReference "PopupView" */,
 			);
 			productRefGroup = 6AC49683280489D6007EC954 /* Products */;
 			projectDirPath = "";
@@ -249,6 +256,7 @@
 				6AC49688280489D6007EC954 /* ContentView.swift in Sources */,
 				1F4649E42809B66800B7AA3D /* CircleButton.swift in Sources */,
 				6AC496A428049997007EC954 /* SpotifyApi.swift in Sources */,
+				6A532ADE2810090100C1DFF4 /* ToastUtils.swift in Sources */,
 				6A4F8555280DA02200DF8028 /* LoadingView.swift in Sources */,
 				6AD78A51280573320038D67F /* HomeView.swift in Sources */,
 				6AC49686280489D6007EC954 /* SpotifyMapApp.swift in Sources */,
@@ -399,6 +407,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"SpotifyMap/Preview Content\"";
+				DEVELOPMENT_TEAM = KLKN859DHX;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "SpotifyMap needs your location to show it on the map";
@@ -428,6 +437,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"SpotifyMap/Preview Content\"";
+				DEVELOPMENT_TEAM = KLKN859DHX;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "SpotifyMap needs your location to show it on the map";
@@ -471,6 +481,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		6A532ADA281005C000C1DFF4 /* XCRemoteSwiftPackageReference "PopupView" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/exyte/PopupView";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		6A532ADB281005C000C1DFF4 /* PopupView */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6A532ADA281005C000C1DFF4 /* XCRemoteSwiftPackageReference "PopupView" */;
+			productName = PopupView;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 6AC4967A280489D6007EC954 /* Project object */;
 }
