@@ -1,26 +1,39 @@
 import SwiftUI
 
 struct SongCard: View {
-    var songName = ""
-    let musician = "Musician"
-    let albumName = "Album"
+    var songName: String
+    var artist: String
+    var albumName: String
+    var thumbnail: String
     
-    init(songName: String) {
+    init(songName: String, artist: String?, albumName: String?, thumbnail: String?) {
         self.songName = songName
+        self.artist = artist ?? ""
+        self.albumName = albumName ?? ""
+        self.thumbnail = thumbnail ?? "unknown"
     }
     
     var body: some View {
         VStack(alignment: .leading) {
-            Image("AlbumCoverPlaceholder")
-                .resizable()
-                .scaledToFit()
+            if (thumbnail == "unknown") {
+                Image("AlbumCoverPlaceholder")
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 220, height: 220)
+            } else {
+                AsyncImage(url: URL(string: thumbnail)) {image in
+                    image.resizable()
+                } placeholder: {
+                    ProgressView()
+                }
                 .frame(width: 220, height: 220)
+            }
             Text(songName)
                 .fontWeight(.bold)
                 .padding(.horizontal, 5)
             HStack() {
                 VStack(alignment: .leading) {
-                    Text(musician)
+                    Text(artist)
                         .font(.callout)
                     Text(albumName)
                         .font(.callout)
@@ -47,7 +60,7 @@ struct SongList: View {
                 HStack {
                     ForEach(requestManager.songs, id: \.self) {song in
                         Spacer()
-                        SongCard(songName: song.name)
+                        SongCard(songName: song.name, artist: song.artist, albumName: song.albumName, thumbnail: song.albumThumb)
                         Spacer()
                     }
                 }

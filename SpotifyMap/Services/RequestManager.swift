@@ -7,6 +7,9 @@ struct ServerMessage: Decodable {
 }
 
 struct FetchSingleSong: Codable, Hashable {
+    let albumName: String?
+    let albumThumb: String?
+    let artist: String?
     let createdOn: String
     let id: Int
     let name: String
@@ -15,8 +18,10 @@ struct FetchSingleSong: Codable, Hashable {
     let updatedAt: String?
     
     enum CodingKeys: String, CodingKey {
+        case albumName = "album_name"
+        case albumThumb = "album_thumb"
         case createdOn = "created_on"
-        case id, name, popularity
+        case id, name, popularity, artist
         case spotifyID = "spotifyId"
         case updatedAt = "updated_at"
     }
@@ -46,6 +51,9 @@ class RequestManager: ObservableObject {
         }
         guard let url = URL(string: "http://10.114.34.4/app/app/location/\"\(area.replacingOccurrences(of: "ä", with: "a"))\"".replacingOccurrences(of: "\"", with: "")) else {
             print("invalid url")
+            DispatchQueue.main.async {
+                self.isLoading = false
+            }
             return
         }
         var request = URLRequest(url: url)
@@ -58,6 +66,5 @@ class RequestManager: ObservableObject {
                 self.isLoading = false
             }
         }.resume()
-        self.isLoading = false
     }
 }
