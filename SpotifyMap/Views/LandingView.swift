@@ -12,7 +12,7 @@ struct LandingView: View {
             
             // Spotify login.
             ShadowRect(height: 250) {
-                Text("Connect your")
+                Text(LocalizedStringKey("Connect your"))
                     .font(.system(size: 30))
                     
                 Image("SpotifyLogo")
@@ -29,9 +29,9 @@ struct LandingView: View {
             
             // Guest login.
             ShadowRect(height: 250) {
-                Text("Continue as a guest")
+                Text(LocalizedStringKey("Continue as a guest"))
                     .font(.title)
-                Text("with limited features")
+                Text(LocalizedStringKey("with limited features"))
                     .font(.title2)
                 
                 Image(systemName: "person")

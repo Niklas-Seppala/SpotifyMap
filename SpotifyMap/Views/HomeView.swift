@@ -21,9 +21,10 @@ struct HomeView: View {
                             Image(systemName: "plus")
                                 .font(.system(size: 28))
                         }
-                        LocationButton(.currentLocation) {
+                        // BUG: LocationButton crashes the app when sys langauge is changes to Finnish
+                        /*LocationButton(.currentLocation) {
                             viewModel.checkIfLocationServicesIsEnabled()
-                        }
+                        }*/
                         .clipShape(Circle())
                         .font(.system(size: 25))
                         .position(x: geometry.size.width - 38, y: -109)
@@ -32,8 +33,8 @@ struct HomeView: View {
                         .labelStyle(.iconOnly)
                         .tint(Color(hex: 0x221c48))
                     
-                        Text("The Sound of \(viewModel.regionName)")
-                                .frame(width: geometry.size.width, alignment: .center)
+                        Text(LocalizedStringKey("The Sound of \(viewModel.regionName)"))
+                            .frame(width: geometry.size.width, alignment: .center)
                             .font(.title2)
                             .padding(.vertical, 12)
                             .background(Color.black.opacity(0.3))
