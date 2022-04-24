@@ -1,9 +1,13 @@
 import SwiftUI
 
 struct SongCard: View {
-    let songName = "Hotel Room Service"
-    let musician = "Pitbull"
-    let albumName = "Rebelution"
+    var songName = ""
+    let musician = "Musician"
+    let albumName = "Album"
+    
+    init(songName: String) {
+        self.songName = songName
+    }
     
     var body: some View {
         VStack(alignment: .leading) {
@@ -35,22 +39,23 @@ struct SongCard: View {
 }
 
 struct SongList: View {
+    @ObservedObject var requestManager: RequestManager
+    
     var body: some View {
-        ScrollView (.horizontal, showsIndicators: false) {
-            HStack {
-                ForEach(0...4, id: \.self) {index in
-                    Spacer()
-                    SongCard()
-                    Spacer()
+        if (requestManager.songs.count > 0) {
+            ScrollView (.horizontal, showsIndicators: false) {
+                HStack {
+                    ForEach(requestManager.songs, id: \.self) {song in
+                        Spacer()
+                        SongCard(songName: song.name)
+                        Spacer()
+                    }
                 }
             }
+            .padding(.top, 12)
+        } else {
+            Text("No songs found in this area")
+                .frame(height: 330)
         }
-        .padding(.top, 12)
-    }
-}
-
-struct SongList_Previews: PreviewProvider {
-    static var previews: some View {
-        SongList()
     }
 }
