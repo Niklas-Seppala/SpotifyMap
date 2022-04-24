@@ -10,8 +10,8 @@ class MapViewModel: NSObject, ObservableObject,
     
     @Published var region = MKCoordinateRegion(center: MapDetails.startingLocation, span: MapDetails.defaulSpan)
     @Published var regionName = ""
-    var locationManager = CLLocationManager()
-    
+    @Published var requestManager = RequestManager()
+    @Published var locationManager = CLLocationManager()
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         guard let location = locations.first else {
@@ -24,6 +24,7 @@ class MapViewModel: NSObject, ObservableObject,
         
         resolveRegionName(with: location) { [weak self] locationName in
             self?.regionName = locationName ?? "(unknown)"
+            self?.requestManager.getAreaSongs(area: locationName ?? "Unknown")
         }
     }
     
@@ -33,7 +34,6 @@ class MapViewModel: NSObject, ObservableObject,
     
     func checkIfLocationServicesIsEnabled() {
         if CLLocationManager.locationServicesEnabled() {
-            locationManager = CLLocationManager()
             locationManager.delegate = self
             locationManager.requestLocation()
         }

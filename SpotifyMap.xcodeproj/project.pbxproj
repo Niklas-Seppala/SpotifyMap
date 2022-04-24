@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		1F4649DC2809980D00B7AA3D /* SongList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F4649DB2809980D00B7AA3D /* SongList.swift */; };
 		1F4649E42809B66800B7AA3D /* CircleButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F4649E32809B66800B7AA3D /* CircleButton.swift */; };
+		1F4715EA28147C9800350CD9 /* RequestManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F4715E928147C9800350CD9 /* RequestManager.swift */; };
 		6A3AC172280D5E9B005A80C8 /* AuthResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A3AC171280D5E9B005A80C8 /* AuthResponse.swift */; };
 		6A4F8555280DA02200DF8028 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A4F8554280DA02200DF8028 /* LoadingView.swift */; };
 		6A4F8557280DC03800DF8028 /* Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A4F8556280DC03800DF8028 /* Errors.swift */; };
@@ -33,6 +34,7 @@
 /* Begin PBXFileReference section */
 		1F4649DB2809980D00B7AA3D /* SongList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SongList.swift; sourceTree = "<group>"; };
 		1F4649E32809B66800B7AA3D /* CircleButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleButton.swift; sourceTree = "<group>"; };
+		1F4715E928147C9800350CD9 /* RequestManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestManager.swift; sourceTree = "<group>"; };
 		6A3AC171280D5E9B005A80C8 /* AuthResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthResponse.swift; sourceTree = "<group>"; };
 		6A4F8554280DA02200DF8028 /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
 		6A4F8556280DC03800DF8028 /* Errors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Errors.swift; sourceTree = "<group>"; };
@@ -131,6 +133,7 @@
 				6A532ADD2810090100C1DFF4 /* ToastUtils.swift */,
 				6AC496A228049976007EC954 /* Api */,
 				6AC496A028049968007EC954 /* AuthManager.swift */,
+				1F4715E928147C9800350CD9 /* RequestManager.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -247,6 +250,7 @@
 				6AC4969F28049600007EC954 /* LandingView.swift in Sources */,
 				6A4F8557280DC03800DF8028 /* Errors.swift in Sources */,
 				6A3AC172280D5E9B005A80C8 /* AuthResponse.swift in Sources */,
+				1F4715EA28147C9800350CD9 /* RequestManager.swift in Sources */,
 				6AC49688280489D6007EC954 /* ContentView.swift in Sources */,
 				1F4649E42809B66800B7AA3D /* CircleButton.swift in Sources */,
 				6AC496A428049997007EC954 /* SpotifyApi.swift in Sources */,
