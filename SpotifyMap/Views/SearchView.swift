@@ -14,11 +14,10 @@ struct SearchView: View {
                 HStack{
                     Image(systemName: "magnifyingglass")
                     TextField("Search",text: $searchText)
-                    Button("Search") {
-                        print("Running API search")
-                        getSearchSongs(search: searchText)
-                    }
-                    .padding(.trailing, 10)
+                        .onSubmit {
+                            print("Running API search")
+                            getSearchSongs(search: searchText)
+                        }.submitLabel(.search)
                 }
                 .padding(.leading, 10)
                 }
