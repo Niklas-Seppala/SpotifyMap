@@ -25,7 +25,7 @@ struct HomeView: View {
                                     viewModel.checkIfLocationServicesIsEnabled()
                                 }
                                 .frame(height: geometry.size.height - 390)
-                                .popup(isPresented:$showingToast, type:.toast, position: .top, autohideIn: 10.0) {
+                                .popup(isPresented:$showingToast, type:.toast, position: .top, autohideIn: 4.0) {
                                     createTopToast(toastText: toastMessage)
                                 }
                         }
@@ -60,6 +60,11 @@ struct HomeView: View {
                 }
                 .edgesIgnoringSafeArea(.top)
                 .navigationBarBackButtonHidden(true)
+            }
+        }
+        .task {
+            if authManager.isSignedIn {
+                showToastMessage(toastText: "Connected with Spotify")
             }
         }
     }
