@@ -28,6 +28,7 @@
 		6AC496A428049997007EC954 /* SpotifyApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AC496A328049997007EC954 /* SpotifyApi.swift */; };
 		6AC496A6280499BA007EC954 /* BackendApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AC496A5280499BA007EC954 /* BackendApi.swift */; };
 		6AC496AA2804A0FE007EC954 /* SpotifyAuthView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AC496A92804A0FE007EC954 /* SpotifyAuthView.swift */; };
+		6AD2297B28104EB1004D0358 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6AD2297D28104EB1004D0358 /* Localizable.strings */; };
 		6AD78A51280573320038D67F /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AD78A50280573320038D67F /* HomeView.swift */; };
 /* End PBXBuildFile section */
 
@@ -53,6 +54,8 @@
 		6AC496A328049997007EC954 /* SpotifyApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotifyApi.swift; sourceTree = "<group>"; };
 		6AC496A5280499BA007EC954 /* BackendApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackendApi.swift; sourceTree = "<group>"; };
 		6AC496A92804A0FE007EC954 /* SpotifyAuthView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotifyAuthView.swift; sourceTree = "<group>"; };
+		6AD2297C28104EB1004D0358 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		6AD2297E28104EB3004D0358 /* fi */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fi; path = fi.lproj/Localizable.strings; sourceTree = "<group>"; };
 		6AD78A50280573320038D67F /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -120,6 +123,7 @@
 				6AC4969B28049403007EC954 /* Subviews */,
 				6AC49687280489D6007EC954 /* ContentView.swift */,
 				6AC4969E28049600007EC954 /* LandingView.swift */,
+				6AD2297D28104EB1004D0358 /* Localizable.strings */,
 				6AD78A50280573320038D67F /* HomeView.swift */,
 				6A9302BD280AEB5D00065F2F /* MapViewModel.swift */,
 				6AC496A92804A0FE007EC954 /* SpotifyAuthView.swift */,
@@ -213,6 +217,7 @@
 			knownRegions = (
 				en,
 				Base,
+				fi,
 			);
 			mainGroup = 6AC49679280489D6007EC954;
 			packageReferences = (
@@ -233,6 +238,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6AC4968D280489D8007EC954 /* Preview Assets.xcassets in Resources */,
+				6AD2297B28104EB1004D0358 /* Localizable.strings in Resources */,
 				6AC4968A280489D8007EC954 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -267,6 +273,18 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		6AD2297D28104EB1004D0358 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				6AD2297C28104EB1004D0358 /* en */,
+				6AD2297E28104EB3004D0358 /* fi */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		6AC4968E280489D8007EC954 /* Debug */ = {
