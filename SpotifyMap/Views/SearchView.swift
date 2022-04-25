@@ -11,7 +11,8 @@ struct SearchView: View {
     var body: some View {
         Background{
             Button("Button title") {
-                getSearchSongs(search: "")
+                print("Running API search")
+                getSearchSongs(search: "Pitbull")
             }
         }.preferredColorScheme(.dark)
     }
