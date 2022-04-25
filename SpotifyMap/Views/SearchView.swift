@@ -6,14 +6,22 @@
 //
 
 import SwiftUI
-
 struct SearchView: View {
+@State var searchText = ""
     var body: some View {
         Background{
-            Button("Button title") {
-                print("Running API search")
-                getSearchSongs(search: "Pitbull")
-            }
+            VStack{
+                HStack{
+                    Image(systemName: "magnifyingglass")
+                    TextField("Search",text: $searchText)
+                    Button("Search") {
+                        print("Running API search")
+                        getSearchSongs(search: searchText)
+                    }
+                    .padding(.trailing, 10)
+                }
+                .padding(.leading, 10)
+                }
         }.preferredColorScheme(.dark)
     }
 }
