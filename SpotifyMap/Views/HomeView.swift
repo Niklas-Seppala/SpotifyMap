@@ -23,7 +23,7 @@ struct HomeView: View {
                             ZStack(alignment: .top) {
                                 Map(coordinateRegion: $viewModel.region, showsUserLocation: true)
                                     .onAppear {
-                                        viewModel.checkIfLocationServicesIsEnabled()
+                                        viewModel.requestLocation()
                                         showToastMessage(toastText:"The toast works!")
                                     }
                                     .frame(height: geometry.size.height - 390)
@@ -34,23 +34,22 @@ struct HomeView: View {
                             }
                             .frame(height: geometry.size.height - 390)
 
-                        CircleButton(xOffset: geometry.size.width - 38, yOffset: -38) {
+                            CircleButton(xOffset: geometry.size.width - 38, yOffset: -38, action: {}) {
                             Image(systemName: "plus")
                                 .font(.system(size: 28))
-                        }
-
-                        // BUG: LocationButton crashes the app when sys langauge is changes to Finnish
-                        /*LocationButton(.currentLocation) {
-                            viewModel.checkIfLocationServicesIsEnabled()
-                        }
-                        .clipShape(Circle())
-                        .font(.system(size: 25))
-                        .position(x: geometry.size.width - 38, y: -109)
-                        .zIndex(2)
-                        .foregroundColor(.white)
-                        .labelStyle(.iconOnly)
-                        .tint(Color(hex: 0x221c48))*/
-                        
+                            }
+                            CircleButton(xOffset: geometry.size.width - 38, yOffset: -109, action: {
+                                viewModel.checkLocationAuthorization()
+                            }) {
+                            Image(systemName: "location.fill")
+                                .font(.system(size: 22))
+                            }
+                            .alert(isPresented: $viewModel.alertIsPresented, content: {
+                                Alert(title: Text("Location Alert"),
+                                      message: Text("Please give location permissions to this app in order to locate you."),
+                                      dismissButton: .default(Text("Cancel")))
+                            })
+                                                
                         if (!viewModel.requestManager.isLoading) {
                             Text(LocalizedStringKey("The Sound of \(viewModel.regionName)"))
                                 .frame(width: geometry.size.width, alignment: .center)

@@ -3,6 +3,7 @@ import MapKit
 enum MapDetails {
     static let startingLocation = CLLocationCoordinate2D(latitude: 60.224305, longitude: 24.757239)
     static let defaulSpan = MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01)
+    static let defaultLocation = CLLocation(latitude: 60.224305, longitude: 24.757239)
 }
 
 class MapViewModel: NSObject, ObservableObject,
@@ -12,6 +13,7 @@ class MapViewModel: NSObject, ObservableObject,
     @Published var regionName = ""
     @Published var requestManager = RequestManager()
     @Published var locationManager = CLLocationManager()
+    @Published var alertIsPresented = false
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         guard let location = locations.first else {
@@ -31,15 +33,15 @@ class MapViewModel: NSObject, ObservableObject,
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
         print(error.localizedDescription)
     }
-    
-    func checkIfLocationServicesIsEnabled() {
+        
+    func requestLocation() {
         if CLLocationManager.locationServicesEnabled() {
             locationManager.delegate = self
             locationManager.requestLocation()
         }
     }
     
-   private func checkLocationAuthorization() {
+    func checkLocationAuthorization() {
         switch locationManager.authorizationStatus {
             
         case .notDetermined:
@@ -47,14 +49,13 @@ class MapViewModel: NSObject, ObservableObject,
         case .restricted:
             print("location restircted")
         case .denied:
-            print("location denied")
-            let location = CLLocation(latitude: 60.224305, longitude: 24.757239)
-            resolveRegionName(with: location) { [weak self] locationName in
+            alertIsPresented = true
+            
+            resolveRegionName(with: MapDetails.defaultLocation) { [weak self] locationName in
                 self?.regionName = locationName ?? "(unknown)"
             }
         case .authorizedAlways, .authorizedWhenInUse:
             region = MKCoordinateRegion(center: locationManager.location!.coordinate, span: MapDetails.defaulSpan)
-            print(region.center.longitude, region.center.latitude)
             
             let location = CLLocation(latitude: region.center.latitude, longitude: region.center.longitude)
             resolveRegionName(with: location) { [weak self] locationName in
