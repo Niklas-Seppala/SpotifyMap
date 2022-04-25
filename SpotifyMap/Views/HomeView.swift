@@ -24,7 +24,7 @@ struct HomeView: View {
                                 Map(coordinateRegion: $viewModel.region, showsUserLocation: true)
                                     .onAppear {
                                         viewModel.checkIfLocationServicesIsEnabled()
-                                        showToastMessage(toastText:"The toast works!")
+                                        //showToastMessage(toastText:"The toast works!")
                                     }
                                     .frame(height: geometry.size.height - 390)
                                     .popup(isPresented:$showingToast, type:.toast, position: .top, autohideIn: 10.0) {
@@ -66,6 +66,11 @@ struct HomeView: View {
                 }
                 .edgesIgnoringSafeArea(.top)
                 .navigationBarBackButtonHidden(true)
+            }
+        }
+        .task {
+            if authManager.isSignedIn {
+                showToastMessage(toastText: "Connected with Spotify")
             }
         }
     }

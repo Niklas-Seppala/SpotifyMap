@@ -14,12 +14,13 @@ func createTopToast(toastText: String) -> some View {
             HStack(alignment: .center) {
                 Rectangle()
                     .fill(Color(hex:0x1ED760))
-                    .frame(maxWidth: 4, maxHeight: 50, alignment: .leading)
-                VStack(alignment: .leading) {
+                    .frame(maxWidth: 12, maxHeight: geometry.size.height)
+                VStack(alignment: .center) {
                     Text(toastText)
                         .lineLimit(5)
-                        .font(.system(size: 14))
+                        .font(.system(size: 16))
                         .foregroundColor(.white)
+                        .padding(.leading)
                     
                 }
                 Spacer()

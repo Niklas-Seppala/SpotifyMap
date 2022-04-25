@@ -20,8 +20,8 @@ class AuthManager: ObservableObject {
     }
     
     init() {
-        self.signIn()
-        //self.signOut() // Uncomment this to clear cache at the startup.
+        //self.signIn()
+        self.signOut() // Uncomment this to clear cache at the startup.
     }
     
     public var signInURL: URL? {

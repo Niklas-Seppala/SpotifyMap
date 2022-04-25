@@ -7,6 +7,7 @@ struct ContentView: View {
         if authManager.isLoading {
             // Show loading spinner while cached accesss token is being fetched.
             LoadingView(title: "")
+                .preferredColorScheme(.dark)
         } else {
             Background {
                 if authManager.isSignedIn || authManager.isAnonymous {
@@ -19,6 +20,7 @@ struct ContentView: View {
             }
             .foregroundColor(.white)
             .transition(.opacity)
+            .preferredColorScheme(.dark)
         }
     }
 }
