@@ -9,44 +9,13 @@ struct LandingView: View {
             Text("LOGO")
                 .font(.system(size: 60))
             Spacer()
-            
-            // Spotify login.
-            ShadowRect(height: 250) {
-                Text("Connect your")
-                    .font(.system(size: 30))
-                    
-                Image("SpotifyLogo")
-                    .resizable()
-                    .scaledToFit()
-                    .frame(width: 200, height: 70)
-            }.onTapGesture { displayWeb = true }
-            .sheet(isPresented: $displayWeb) {
-                SpotifyAuthView(authManager: authManager)
-            }
-            
+            SpotifyAuthButton(authManager: authManager)
             Spacer()
             Spacer()
-            
-            // Guest login.
-            ShadowRect(height: 250) {
-                Text("Continue as a guest")
-                    .font(.title)
-                Text("with limited features")
-                    .font(.title2)
-                
-                Image(systemName: "person")
-                    .resizable()
-                    .scaledToFit()
-                    .frame(width: 50, height: 50)
-            }.onTapGesture {
-                withAnimation {
-                    authManager.isAnonymous = true
-                }
-            }
+            VisitorAuthButton(authManager: authManager)
             Spacer()
         }
-        .tint(.green)
-        .preferredColorScheme(.dark)
+        //.preferredColorScheme(.dark)
     }
 }
 
