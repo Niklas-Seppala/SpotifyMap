@@ -32,9 +32,11 @@ struct HomeView: View {
 
                             }
                             
-                            CircleButton(xOffset: geometry.size.width - 38, yOffset: -38) {
+                            CircleButton(xOffset: geometry.size.width - 38, yOffset: -38,action: {}) {
+                                NavigationLink(destination: SearchView()){
                                 Image(systemName: "plus")
                                     .font(.system(size: 28))
+                                }
                             }
                             LocationButton(.currentLocation) {
                                 viewModel.checkIfLocationServicesIsEnabled()

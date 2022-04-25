@@ -4,15 +4,17 @@ struct CircleButton<T: View> : View {
     let xOffset: CGFloat
     let yOffset: CGFloat
     var content: () -> T
+    var action: () -> Void
     
-    init(xOffset: CGFloat, yOffset: CGFloat, @ViewBuilder content: @escaping () -> T) {
+    init(xOffset: CGFloat, yOffset: CGFloat, action: @escaping () -> Void , @ViewBuilder content: @escaping () -> T) {
         self.content = content
         self.xOffset = xOffset
         self.yOffset = yOffset
+        self.action = action
     }
     
     var body: some View {
-        Button(action: {}) {
+        Button(action: action) {
             content()
                 .frame(width: 56, height: 56)
         }
