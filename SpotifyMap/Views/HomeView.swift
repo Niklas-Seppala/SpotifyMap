@@ -15,6 +15,7 @@ struct HomeView: View {
     }
     
     var body: some View {
+
             NavigationView {
                 Background {
                     GeometryReader { geometry in
@@ -32,10 +33,12 @@ struct HomeView: View {
 
                             }
                             .frame(height: geometry.size.height - 390)
+
                         CircleButton(xOffset: geometry.size.width - 38, yOffset: -38) {
                             Image(systemName: "plus")
                                 .font(.system(size: 28))
                         }
+
                         // BUG: LocationButton crashes the app when sys langauge is changes to Finnish
                         /*LocationButton(.currentLocation) {
                             viewModel.checkIfLocationServicesIsEnabled()
@@ -47,31 +50,23 @@ struct HomeView: View {
                         .foregroundColor(.white)
                         .labelStyle(.iconOnly)
                         .tint(Color(hex: 0x221c48))*/
-                    
-                        Text(LocalizedStringKey("The Sound of \(viewModel.regionName)"))
-                            .frame(width: geometry.size.width, alignment: .center)
-                            .font(.title2)
-                            .padding(.vertical, 12)
-                            .background(Color.black.opacity(0.3))
-                   
-                            SongList()
+                        
+                        if (!viewModel.requestManager.isLoading) {
+                            Text(LocalizedStringKey("The Sound of \(viewModel.regionName)"))
+                                .frame(width: geometry.size.width, alignment: .center)
+                                .font(.title2)
+                                .padding(.vertical, 12)
+                                .background(Color.black.opacity(0.3))
+                            SongList(requestManager: viewModel.requestManager)
+                        } else {
+                            LoadingView(title: "")
+                                .frame(height: geometry.size.height - 390)
                         }
                     }
-                    .edgesIgnoringSafeArea(.top)
-                    .navigationBarBackButtonHidden(true)
-
                 }
-
+                .edgesIgnoringSafeArea(.top)
+                .navigationBarBackButtonHidden(true)
             }
-
-    
-}
-}
-
-struct HomeView_Previews: PreviewProvider {
-    static var previews: some View {
-        NavigationView {
-            HomeView(authManager: AuthManager())
         }
     }
 }
