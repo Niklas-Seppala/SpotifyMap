@@ -8,7 +8,7 @@ struct VisitorAuthButton: View {
     }
     
     var body: some View {
-        Button("Continue as a guest") {
+        Button("") {
             Task {
                 await delayRedirect()
                 withAnimation {
@@ -23,9 +23,9 @@ struct VisitorAuthButton: View {
     private struct GuestButtonStyle: ButtonStyle {
         func makeBody(configuration: Self.Configuration) -> some View {
             ShadowRect(height: 250) {
-                configuration.label
+                Text(LocalizedStringKey("Continue as a guest"))
                     .font(.title)
-                Text("with limited features")
+                Text(LocalizedStringKey("with limited features"))
                     .font(.title2)
                 
                 Image(systemName: "person")

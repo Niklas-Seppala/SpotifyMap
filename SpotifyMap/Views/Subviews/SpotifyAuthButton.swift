@@ -9,7 +9,7 @@ struct SpotifyAuthButton: View {
     }
     
     var body: some View {
-        Button("Connect your") {
+        Button("") {
             Task {
                 await delayRedirect()
                 displayWeb = true
@@ -25,7 +25,7 @@ struct SpotifyAuthButton: View {
     private struct SpotifyButtonStyle: ButtonStyle {
         func makeBody(configuration: Self.Configuration) -> some View {
             ShadowRect(height: 250) {
-                configuration.label
+                Text(LocalizedStringKey("Connect your"))
                     .font(.system(size: 30))
                     
                 Image("SpotifyLogo")

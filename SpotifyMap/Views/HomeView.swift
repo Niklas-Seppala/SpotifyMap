@@ -15,26 +15,32 @@ struct HomeView: View {
     }
     
     var body: some View {
-        NavigationView {
-            Background {
-                GeometryReader { geometry in
-                    VStack(spacing: 0){
-                        ZStack(alignment: .top) {
-                            Map(coordinateRegion: $viewModel.region, showsUserLocation: true)
-                                .onAppear {
-                                    viewModel.checkIfLocationServicesIsEnabled()
-                                }
-                                .frame(height: geometry.size.height - 390)
-                                .popup(isPresented:$showingToast, type:.toast, position: .top, autohideIn: 4.0) {
-                                    createTopToast(toastText: toastMessage)
-                                }
-                        }
-                        
+
+            NavigationView {
+                Background {
+                    GeometryReader { geometry in
+                        VStack(spacing: 0){
+                            ZStack(alignment: .top) {
+                                Map(coordinateRegion: $viewModel.region, showsUserLocation: true)
+                                    .onAppear {
+                                        viewModel.checkIfLocationServicesIsEnabled()
+                                        //showToastMessage(toastText:"The toast works!")
+                                    }
+                                    .frame(height: geometry.size.height - 390)
+                                    .popup(isPresented:$showingToast, type:.toast, position: .top, autohideIn: 10.0) {
+                                        createTopToast(toastText: toastMessage)
+                                    }
+
+                            }
+                            .frame(height: geometry.size.height - 390)
+
                         CircleButton(xOffset: geometry.size.width - 38, yOffset: -38) {
                             Image(systemName: "plus")
                                 .font(.system(size: 28))
                         }
-                        LocationButton(.currentLocation) {
+
+                        // BUG: LocationButton crashes the app when sys langauge is changes to Finnish
+                        /*LocationButton(.currentLocation) {
                             viewModel.checkIfLocationServicesIsEnabled()
                         }
                         .clipShape(Circle())
@@ -43,10 +49,10 @@ struct HomeView: View {
                         .zIndex(2)
                         .foregroundColor(.white)
                         .labelStyle(.iconOnly)
-                        .tint(Color(hex: 0x221c48))
+                        .tint(Color(hex: 0x221c48))*/
                         
                         if (!viewModel.requestManager.isLoading) {
-                            Text("The Sound of \(viewModel.regionName)")
+                            Text(LocalizedStringKey("The Sound of \(viewModel.regionName)"))
                                 .frame(width: geometry.size.width, alignment: .center)
                                 .font(.title2)
                                 .padding(.vertical, 12)
