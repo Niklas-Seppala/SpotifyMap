@@ -1,12 +1,5 @@
 import SwiftUI
 
-struct SongLoading: View {
-    
-    var body: some View {
-        LoadingView(title: "")
-    }
-}
-
 struct SongCard: View {
     var songName: String
     var artist: String
@@ -78,7 +71,8 @@ struct SongList: View {
                     .frame(height: 330)
             }
         } else {
-            SongLoading()
+            LoadingView(title: "")
+                .frame(height: 330)
         }
     }
 }
