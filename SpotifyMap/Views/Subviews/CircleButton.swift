@@ -6,7 +6,8 @@ struct CircleButton<T: View> : View {
     var content: () -> T
     var action: () -> Void
     
-    init(xOffset: CGFloat, yOffset: CGFloat, action: @escaping () -> Void , @ViewBuilder content: @escaping () -> T) {
+
+    init(xOffset: CGFloat, yOffset: CGFloat, action: @escaping () -> Void, @ViewBuilder content: @escaping () -> T) {
         self.content = content
         self.xOffset = xOffset
         self.yOffset = yOffset
