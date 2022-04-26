@@ -15,7 +15,6 @@ struct HomeView: View {
     }
     
     var body: some View {
-
             NavigationView {
                 Background {
                     GeometryReader { geometry in
@@ -35,8 +34,10 @@ struct HomeView: View {
                             .frame(height: geometry.size.height - 390)
 
                             CircleButton(xOffset: geometry.size.width - 38, yOffset: -38, action: {}) {
-                            Image(systemName: "plus")
-                                .font(.system(size: 28))
+                                NavigationLink(destination: SearchView()){
+                                           Image(systemName: "plus")
+                                               .font(.system(size: 28))
+                                           }
                             }
                             CircleButton(xOffset: geometry.size.width - 38, yOffset: -109, action: {
                                 viewModel.checkLocationAuthorization()
@@ -49,7 +50,6 @@ struct HomeView: View {
                                       message: Text("Please give location permissions to this app in order to locate you."),
                                       dismissButton: .default(Text("Cancel")))
                             })
-                                                
                         if (!viewModel.requestManager.isLoading) {
                             Text(LocalizedStringKey("The Sound of \(viewModel.regionName)"))
                                 .frame(width: geometry.size.width, alignment: .center)
