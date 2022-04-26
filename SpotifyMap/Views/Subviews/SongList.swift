@@ -1,5 +1,12 @@
 import SwiftUI
 
+struct SongLoading: View {
+    
+    var body: some View {
+        LoadingView(title: "")
+    }
+}
+
 struct SongCard: View {
     var songName: String
     var artist: String
@@ -55,20 +62,23 @@ struct SongList: View {
     @ObservedObject var requestManager: RequestManager
     
     var body: some View {
-        if (requestManager.songs.count > 0) {
-            ScrollView (.horizontal, showsIndicators: false) {
-                HStack {
-                    ForEach(requestManager.songs, id: \.self) {song in
-                        Spacer()
-                        SongCard(songName: song.name, artist: song.artist, albumName: song.albumName, thumbnail: song.albumThumb)
-                        Spacer()
+        if (!requestManager.isLoading) {
+            if(requestManager.songs.count > 0) {
+                ScrollView (.horizontal, showsIndicators: false) {
+                    HStack {
+                        ForEach(requestManager.songs, id: \.self) {song in
+                            Spacer()
+                            SongCard(songName: song.name, artist: song.artist, albumName: song.albumName, thumbnail: song.albumThumb)
+                            Spacer()
+                        }
                     }
-                }
+                }.padding(.top, 12)
+            } else {
+                Text("No songs found in this area")
+                    .frame(height: 330)
             }
-            .padding(.top, 12)
         } else {
-            Text("No songs found in this area")
-                .frame(height: 330)
+            SongLoading()
         }
     }
 }

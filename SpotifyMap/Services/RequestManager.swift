@@ -42,13 +42,11 @@ struct FetchResponse: Codable {
 }
 
 class RequestManager: ObservableObject {
-    @Published var isLoading = false
+    @Published var isLoading = true
     @Published var songs = [FetchSingleSong]()
     
     func getAreaSongs(area: String) {
-        DispatchQueue.main.async {
-            self.isLoading = true
-        }
+        print("start")
         guard let url = URL(string: "http://10.114.34.4/app/app/location/\"\(area.replacingOccurrences(of: "ä", with: "a"))\"".replacingOccurrences(of: "\"", with: "")) else {
             print("invalid url")
             return
@@ -61,9 +59,10 @@ class RequestManager: ObservableObject {
                 let response = try! JSONDecoder().decode(FetchResponse.self, from: data)
                 DispatchQueue.main.async {
                     self.songs = response.songs
+                    self.isLoading = false
                 }
             }.resume()
-            self.isLoading = false
         }
+        print("finish")
     }
 }
