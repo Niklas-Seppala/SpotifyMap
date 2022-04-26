@@ -10,7 +10,7 @@ struct SearchView: View {
 @State var searchText = ""
     var body: some View {
         Background{
-            VStack{
+            VStack(alignment: .leading){
                 HStack{
                     Image(systemName: "magnifyingglass")
                     TextField("Search",text: $searchText)
@@ -19,9 +19,13 @@ struct SearchView: View {
                             getSearchSongs(search: searchText)
                         }.submitLabel(.search)
                 }
-                .padding(.leading, 10)
+                .padding(.leading, 20)
+                Spacer()
+                Text("test")
                 }
-        }.preferredColorScheme(.dark)
+        }
+        .preferredColorScheme(.dark)
+        .navigationTitle("Search")
     }
 }
 
