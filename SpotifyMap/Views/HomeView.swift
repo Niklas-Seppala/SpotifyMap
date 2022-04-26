@@ -25,7 +25,6 @@ struct HomeView: View {
                                     .onAppear {
                                         viewModel.requestLocation()
                                         showToastMessage(toastText:"The toast works!")
-                                    }
                                     .frame(height: geometry.size.height - 390)
                                     .popup(isPresented:$showingToast, type:.toast, position: .top, autohideIn: 10.0) {
                                         createTopToast(toastText: toastMessage)
@@ -65,6 +64,11 @@ struct HomeView: View {
                 }
                 .edgesIgnoringSafeArea(.top)
                 .navigationBarBackButtonHidden(true)
+            }
+        }
+        .task {
+            if authManager.isSignedIn {
+                showToastMessage(toastText: "Connected with Spotify")
             }
         }
     }
