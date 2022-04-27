@@ -2,12 +2,59 @@ import SwiftUI
 import MapKit
 import CoreLocationUI
 import PopupView
+import WebKit
+/*
+Button("Add song") {
+    Task {
+        guard authManager.isSignedIn else { return }
+        guard let token = await authManager.accessTokenAsync() else { return }
+        
+        print(token)
+        
+        var components = URLComponents()
+        components.queryItems = [
+            URLQueryItem(name: "ids", value: "11dFghVXANMlKmJXsNCbNl"),
+        ]
+        
+        var request = URLRequest(url: URL(string: "https://api.spotify.com/v1/me/tracks")!)
+        request.httpMethod = "PUT"
+        request.httpBody = components.query?.data(using: .utf8)
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.setValue("Bearer \(token.data(using: .utf8)?.base64EncodedString())", forHTTPHeaderField: "Authorization")
+        
+        do {
+            let res = try await URLSession.shared.data(for: request)
+            print(res);
+            showToastMessage(toastText: "Added song to your library.")
+            
+        } catch {
+            throw AuthError.network("Fetching failed")
+        }
+    }
+}
+*/
+struct SpotifyWebView: UIViewRepresentable {
+    var trackURL: URL
+    
+    init(track: String) {
+        self.trackURL = URL(string: "https://open.spotify.com/track/\(track)")!
+    }
+    
+    func makeUIView(context: Context) -> WKWebView  {
+        let view = WKWebView()
+        view.load(URLRequest(url: self.trackURL))
+        return view
+    }
+    
+    func updateUIView(_ uiView: WKWebView, context: Context) {}
+}
 
 struct HomeView: View {
     @StateObject var viewModel = MapViewModel()
-    @ObservedObject var authManager: AuthManager
+    @EnvironmentObject var authManager: AuthManager
     @State var showingToast = false
     @State var toastMessage = ""
+    @State var showBrowser = false
     
     func showToastMessage(toastText: String) {
         toastMessage = toastText

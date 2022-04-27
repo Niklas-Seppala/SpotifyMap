@@ -25,7 +25,7 @@ class AuthManager: ObservableObject {
     }
     
     public var signInURL: URL? {
-        let scope = "user-read-private"
+        let scope = "user-read-private%20user-library-modify"
         let str = "\(SpotifyURL.AUTHENTICATE)?response_type=code&client_id=\(Secrets.CLIENT_ID)&scope=\(scope)&redirect_uri=\(SpotifyURL.REDIRECT)&show_dialog=TRUE"
         return URL(string: str)
     }
@@ -163,7 +163,7 @@ class AuthManager: ObservableObject {
         }
     }
     
-    private func accessTokenAsync() async -> String? {
+    func accessTokenAsync() async -> String? {
         do {
             try await self.refreshIfNeeded()
             return UserDefaults.standard.string(forKey: Keys.ACCESS_TOKEN)

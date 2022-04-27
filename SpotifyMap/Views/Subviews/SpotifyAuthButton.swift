@@ -1,7 +1,7 @@
 import SwiftUI
 
 struct SpotifyAuthButton: View {
-    @ObservedObject var authManager: AuthManager
+    @EnvironmentObject var authManager: AuthManager
     @State var displayWeb = false
     
     private func delayRedirect() async {
@@ -15,11 +15,11 @@ struct SpotifyAuthButton: View {
                 displayWeb = true
             }
         }
-            .buttonStyle(SpotifyButtonStyle())
-            .sheet(isPresented: $displayWeb) {
-                Button("Cancel") { displayWeb = false }.padding(.top)
-                SpotifyAuthView(authManager: authManager)
-            }
+        .buttonStyle(SpotifyButtonStyle())
+        .sheet(isPresented: $displayWeb) {
+            Button("Cancel") { displayWeb = false }.padding(.top)
+            SpotifyAuthView(authManager: authManager)
+        }
     }
     
     private struct SpotifyButtonStyle: ButtonStyle {
