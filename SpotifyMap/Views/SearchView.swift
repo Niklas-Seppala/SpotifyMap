@@ -18,41 +18,39 @@ struct ConfirmSheetView: View {
     
     var body: some View {
         Background {
-            HStack(alignment: .center) {
-                VStack(alignment: .center) {
-                    Image(systemName: "xmark")
-                        .padding(.top, 30)
-                        .padding(.trailing, 15)
-                        .font(.system(size: 32))
-                    
-                        .onTapGesture {
-                            dismiss()
-                        }
-                        .frame(maxWidth: .infinity, alignment: .trailing)
-                    Spacer()
-                    Text("Add to the song list")
-                        .font(.system(size: 30))
-                        .multilineTextAlignment(.center)
-                        .padding(.bottom, 20)
-                    
-                    SongCard(songName: songName, artist: artist, albumName: albumName, thumbnail: thumbnail)
-                    Spacer()
-                    Button("Confirm") {
-                        addSongToLocation(locationId: LocationVariables.currentLocationId, spotifySongId: id) {finished in
-                            print(finished.msg)
-                        }
+            VStack(alignment: .center) {
+                Image(systemName: "xmark")
+                    .padding(.trailing, 15)
+                    .padding(.bottom, 50)
+                    .font(.system(size: 32))
+                    .onTapGesture {
+                        dismiss()
+                    }
+                    .frame(maxWidth: .infinity, alignment: .topTrailing)
+                Text("Add to the song list")
+                    .font(.system(size: 30))
+                    .multilineTextAlignment(.center)
+                    .padding(.bottom, 20)
+                
+                SongCard(songName: songName, artist: artist, albumName: albumName, thumbnail: thumbnail)
+                    .padding(.bottom, 30)
+                Button(action: {
+                    addSongToLocation(locationId: LocationVariables.currentLocationId, spotifySongId: id) {finished in
+                        print(finished.msg)
+                        dismiss()
+                    }}) {
+                        Text("Confirm")
                     }
                     .padding()
                     .padding(.horizontal, 30)
                     .background(Color(hex: 0x1db954))
                     .foregroundColor(Color.black)
                     .clipShape(Capsule())
-                    Spacer()
-                }
             }
         }
     }
 }
+
 
 struct SearchCard: View {
     var id: String
@@ -168,7 +166,6 @@ struct SearchView: View {
                         }
                         .frame(width: geometry.size.width - 30, height: geometry.size.height)
                     }
-                    
                 }.padding(.horizontal, 15)
             }
         }
