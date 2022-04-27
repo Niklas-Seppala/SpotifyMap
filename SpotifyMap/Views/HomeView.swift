@@ -27,8 +27,18 @@ struct HomeView: View {
                                 }
                         }
                         .frame(height: geometry.size.height - 390)
-                        
-                        CircleButton(xOffset: geometry.size.width - 38, yOffset: -38, action: {}) {
+                        CircleButton(xOffset: geometry.size.width - 38, yOffset: -104, action: {
+                            viewModel.checkLocationAuthorization()
+                        }) {
+                            Image(systemName: "location.fill")
+                                .font(.system(size: 22))
+                        }
+                        .alert(isPresented: $viewModel.alertIsPresented, content: {
+                            Alert(title: Text("Location Alert"),
+                                  message: Text("Please give location permissions to this app in order to locate you."),
+                                  dismissButton: .default(Text("Cancel")))
+                        })
+                        CircleButton(xOffset: geometry.size.width - 38, yOffset: -43, action: {}) {
                             NavigationLink(destination: SearchView( songs: [])){
                                 Image(systemName: "plus")
                                     .font(.system(size: 28))
@@ -39,7 +49,7 @@ struct HomeView: View {
                                   message: Text("Please give location permissions to this app in order to locate you."),
                                   dismissButton: .default(Text("Cancel")))
                         })
-                        Text(viewModel.requestManager.isLoading ? LocalizedStringKey("The Sound of \(viewModel.regionName)") : " ")
+                        Text(LocalizedStringKey(viewModel.regionName.isEmpty ? " " : "The Sound of \(viewModel.regionName)"))
                             .frame(width: geometry.size.width, alignment: .center)
                             .font(.title2)
                             .padding(.vertical, 12)
