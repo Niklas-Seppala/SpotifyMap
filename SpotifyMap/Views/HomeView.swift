@@ -25,6 +25,9 @@ struct HomeView: View {
                                 .popup(isPresented:$showingToast, type:.toast, position: .top, autohideIn: 10.0) {
                                     createTopToast(toastText: toastMessage)
                                 }
+                                .onAppear {
+                                    viewModel.requestLocation()
+                                }
                         }
                         .frame(height: geometry.size.height - 390)
                         CircleButton(xOffset: geometry.size.width - 38, yOffset: -104, action: {
@@ -44,11 +47,6 @@ struct HomeView: View {
                                     .font(.system(size: 28))
                             }
                         }
-                        .alert(isPresented: $viewModel.alertIsPresented, content: {
-                            Alert(title: Text("Location Alert"),
-                                  message: Text("Please give location permissions to this app in order to locate you."),
-                                  dismissButton: .default(Text("Cancel")))
-                        })
                         Text(LocalizedStringKey(viewModel.regionName.isEmpty ? " " : "The Sound of \(viewModel.regionName)"))
                             .frame(width: geometry.size.width, alignment: .center)
                             .font(.title2)
@@ -65,7 +63,6 @@ struct HomeView: View {
             if authManager.isSignedIn {
                 showToastMessage(toastText: "Connected with Spotify")
             }
-            viewModel.requestLocation()
         }
     }
 }
