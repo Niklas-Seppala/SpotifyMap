@@ -1,5 +1,59 @@
 import SwiftUI
 
+struct ConfirmSheetView: View {
+    @Environment(\.dismiss) var dismiss
+    var id: String
+    var songName: String
+    var artist: String
+    var albumName: String
+    var thumbnail: String
+    
+    init(id: String, songName: String, artist: String, albumName: String, thumbnail: String?) {
+        self.id = id
+        self.songName = songName
+        self.artist = artist
+        self.albumName = albumName
+        self.thumbnail = thumbnail ?? "unknown"
+    }
+    
+    var body: some View {
+        Background {
+            HStack(alignment: .center) {
+                VStack(alignment: .center) {
+                    Image(systemName: "xmark")
+                        .padding(.top, 30)
+                        .padding(.trailing, 15)
+                        .font(.system(size: 32))
+                    
+                        .onTapGesture {
+                            dismiss()
+                        }
+                        .frame(maxWidth: .infinity, alignment: .trailing)
+                    Spacer()
+                    Text("Add to the song list")
+                        .font(.system(size: 30))
+                        .multilineTextAlignment(.center)
+                        .padding(.bottom, 20)
+                    
+                    SongCard(songName: songName, artist: artist, albumName: albumName, thumbnail: thumbnail)
+                    Spacer()
+                    Button("Confirm") {
+                        addSongToLocation(locationId: LocationVariables.currentLocationId, spotifySongId: id) {finished in
+                            print(finished.msg)
+                        }
+                    }
+                    .padding()
+                    .padding(.horizontal, 30)
+                    .background(Color(hex: 0x1db954))
+                    .foregroundColor(Color.black)
+                    .clipShape(Capsule())
+                    Spacer()
+                }
+            }
+        }
+    }
+}
+
 struct SearchCard: View {
     var id: String
     var songName: String
@@ -7,6 +61,7 @@ struct SearchCard: View {
     var albumName: String
     var thumbnail: String
     var width: CGFloat
+    @State private var showingSheet = false
     
     init(id: String, songName: String, artist: [Artist], albumName: String?, thumbnail: String?, width: CGFloat) {
         self.id = id
@@ -50,9 +105,11 @@ struct SearchCard: View {
         .frame(width: width - 30, height: 100, alignment: .topLeading)
         .background(Color.black.opacity(0.3))
         .onTapGesture {
-            print(id)
+            showingSheet.toggle()
         }
-        .cornerRadius(5)
+        .sheet(isPresented: $showingSheet) {
+            ConfirmSheetView(id: id, songName: songName, artist: artist, albumName: albumName, thumbnail: thumbnail)
+        }
     }
 }
 
@@ -71,6 +128,7 @@ struct SearchView: View {
                             .font(.system(size: 18))
                         TextField("Search", text: $searchText)
                             .font(.system(size: 18))
+                            .disableAutocorrection(true)
                             .onChange(of: searchText, perform: {value in
                                 getSearchSongs(search: searchText) {result in
                                     songs = result
