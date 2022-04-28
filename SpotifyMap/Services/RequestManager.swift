@@ -70,7 +70,7 @@ class RequestManager: ObservableObject {
                 let response = try! JSONDecoder().decode(FetchResponse.self, from: data)
                 DispatchQueue.main.async {
                     LocationVariables.currentLocationId = response.id
-                    self.songs = response.songs
+                    self.songs = response.songs.sorted(by: { $0.id > $1.id })
                     self.isLoading = false
                 }
             }.resume()
