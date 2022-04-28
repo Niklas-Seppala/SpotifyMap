@@ -102,6 +102,7 @@ struct SearchCard: View {
         }
         .frame(width: width - 30, height: 100, alignment: .topLeading)
         .background(Color.black.opacity(0.3))
+        .cornerRadius(10)
         .onTapGesture {
             showingSheet.toggle()
         }
