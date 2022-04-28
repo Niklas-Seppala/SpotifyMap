@@ -48,6 +48,7 @@ struct SongCard: View {
         }
         .frame(width: 220, height: 320, alignment: .topLeading)
         .background(Color.black.opacity(0.3))
+        .cornerRadius(10)
     }
 }
 
