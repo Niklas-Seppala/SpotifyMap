@@ -2,16 +2,20 @@ import SwiftUI
 import MapKit
 import CoreLocationUI
 import PopupView
+import WebKit
 
 struct HomeView: View {
     @StateObject var viewModel = MapViewModel()
-    @ObservedObject var authManager: AuthManager
+    @EnvironmentObject var authManager: AuthManager
     @State var showingToast = false
     @State var toastMessage = ""
+    @State var toastStatus = ToastStatus.Success
+    @State var showBrowser = false
     
-    func showToastMessage(toastText: String) {
+    func showToastMessage(toastText: String, status: ToastStatus) {
         toastMessage = toastText
         showingToast = true
+        toastStatus = status
     }
     
     var body: some View {
@@ -23,7 +27,7 @@ struct HomeView: View {
                             Map(coordinateRegion: $viewModel.region, showsUserLocation: true)
                                 .frame(height: geometry.size.height - 390)
                                 .popup(isPresented:$showingToast, type:.toast, position: .top, autohideIn: 10.0) {
-                                    createTopToast(toastText: toastMessage)
+                                    createTopToast(toastText: toastMessage, status: toastStatus)
                                 }
                                 .onAppear {
                                     viewModel.requestLocation()
@@ -49,7 +53,7 @@ struct HomeView: View {
                                   dismissButton: .default(Text("OK")))
                         })
                         CircleButton(xOffset: geometry.size.width - 38, yOffset: -43, action: {}) {
-                            NavigationLink(destination: SearchView( songs: [])){
+                            NavigationLink(destination: SearchView(songs: [])){
                                 Image(systemName: "plus")
                                     .font(.system(size: 28))
                             }
@@ -77,7 +81,7 @@ struct HomeView: View {
         }
         .task {
             if authManager.isSignedIn {
-                showToastMessage(toastText: "Connected with Spotify")
+                showToastMessage(toastText: "Connected with Spotify", status: .Success)
             }
         }
     }

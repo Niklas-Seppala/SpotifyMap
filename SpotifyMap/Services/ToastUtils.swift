@@ -8,12 +8,17 @@
 import Foundation
 import SwiftUI
 
-func createTopToast(toastText: String) -> some View {
+enum ToastStatus {
+    case Error
+    case Success
+}
+
+func createTopToast(toastText: String, status: ToastStatus) -> some View {
     GeometryReader { geometry in
         VStack(alignment: .center) {
             HStack(alignment: .center) {
                 Rectangle()
-                    .fill(Color(hex:0x1ED760))
+                    .fill(status == ToastStatus.Success ? Color(hex:0x1ED760) : Color(hex: 0xf06156))
                     .frame(maxWidth: 12, maxHeight: geometry.size.height)
                 VStack(alignment: .center) {
                     Text(toastText)

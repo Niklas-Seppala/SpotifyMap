@@ -8,7 +8,7 @@ class AuthManager: ObservableObject {
     
     struct Secrets {
         // For Spotify application.
-        static let CLIENT_ID = ""
+        static let CLIENT_ID = "d066f02f40af4ea080a5ee47403f89ca"
         static let CLIENT_SECRET = ""
     }
     
@@ -20,13 +20,13 @@ class AuthManager: ObservableObject {
     }
     
     init() {
-        //self.signIn()
-        self.signOut() // Uncomment this to clear cache at the startup.
+        self.signIn()
+        //self.signOut() // Uncomment this to clear cache at the startup.
     }
     
     public var signInURL: URL? {
-        let scope = "user-read-private"
-        let str = "\(SpotifyURL.AUTHENTICATE)?response_type=code&client_id=\(Secrets.CLIENT_ID)&scope=\(scope)&redirect_uri=\(SpotifyURL.REDIRECT)&show_dialog=TRUE"
+        let scope = "user-library-modify%20user-library-read"
+        let str = "\(SpotifyApi.AUTHENTICATE)?response_type=code&client_id=\(Secrets.CLIENT_ID)&scope=\(scope)&redirect_uri=\(SpotifyApi.REDIRECT)&show_dialog=TRUE"
         return URL(string: str)
     }
 
@@ -35,7 +35,7 @@ class AuthManager: ObservableObject {
             self.isLoading = true
         }
         
-        guard let url = URL(string: SpotifyURL.TOKEN_REQUEST) else {
+        guard let url = URL(string: SpotifyApi.TOKEN_REQUEST) else {
             return
         }
         
@@ -43,7 +43,7 @@ class AuthManager: ObservableObject {
         components.queryItems = [
             URLQueryItem(name: "grant_type", value: "authorization_code"),
             URLQueryItem(name: "code", value: code),
-            URLQueryItem(name: "redirect_uri", value: SpotifyURL.REDIRECT),
+            URLQueryItem(name: "redirect_uri", value: SpotifyApi.REDIRECT),
         ]
         
         var request = URLRequest(url: url)
@@ -120,7 +120,7 @@ class AuthManager: ObservableObject {
         guard let refreshToken = self.refreshToken else {
             throw AuthError.missingCache("Failed to refresh")
         }
-        guard let url = URL(string: SpotifyURL.TOKEN_REQUEST) else {
+        guard let url = URL(string: SpotifyApi.TOKEN_REQUEST) else {
             throw AuthError.invalidURL("Failed to refresh")
         }
         
@@ -163,7 +163,7 @@ class AuthManager: ObservableObject {
         }
     }
     
-    private func accessTokenAsync() async -> String? {
+    func accessTokenAsync() async -> String? {
         do {
             try await self.refreshIfNeeded()
             return UserDefaults.standard.string(forKey: Keys.ACCESS_TOKEN)

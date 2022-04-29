@@ -12,12 +12,13 @@ struct ContentView: View {
             Background {
                 if authManager.isSignedIn || authManager.isAnonymous {
                     // Cached access token found, or user selected guest visit.
-                    HomeView(authManager: authManager)
+                    HomeView()
                 } else {
                     // Login options: Spotify or guest.
-                    LandingView(authManager: authManager)
+                    LandingView()
                 }
             }
+            .environmentObject(authManager)
             .foregroundColor(.white)
             .transition(.opacity)
             .preferredColorScheme(.dark)
