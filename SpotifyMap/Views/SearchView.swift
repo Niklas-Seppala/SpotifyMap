@@ -149,7 +149,7 @@ struct SearchView: View {
                             .stroke(Color.white, lineWidth: 1))
                     
                     if(!searchText.isEmpty) {
-                        Text("Showing \(songs.count) results")
+                        Text(LocalizedStringKey("Showing \(songs.count) results"))
                             .padding(.vertical, 6)
                         ScrollView {
                             ForEach(songs) {song in
