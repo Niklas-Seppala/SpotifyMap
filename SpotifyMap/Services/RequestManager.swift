@@ -60,7 +60,7 @@ class RequestManager: ObservableObject {
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
         DispatchQueue.main.async {
-            URLSession.shared.dataTask(with: request) { (data, response, error) in
+            let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
                 guard let data = data else {
                     DispatchQueue.main.async {
                         self.isLoading = false
@@ -73,7 +73,14 @@ class RequestManager: ObservableObject {
                     self.songs = response?.songs.sorted(by: { $0.id > $1.id }) ?? []
                     self.isLoading = false
                 }
-            }.resume()
+            }
+            task.resume()
+            DispatchQueue.main.asyncAfter(deadline: .now() + 5.0 , execute: {
+                            if(self.isLoading == true){
+                                task.cancel()
+                                self.isLoading =  false
+                            }
+                        })
         }
     }
 }
