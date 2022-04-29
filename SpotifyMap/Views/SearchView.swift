@@ -128,9 +128,7 @@ struct SearchView: View {
                     }
                     Button("Search") {
                         speechRecognizer.stopTranscribing()
-                        getSearchSongs(search: speechRecognizer.transcript) {result in
-                            songs = result
-                        }
+                        searchText = speechRecognizer.transcript
                     }
                     HStack {
                         Image(systemName: "magnifyingglass")
