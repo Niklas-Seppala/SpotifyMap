@@ -119,6 +119,7 @@ struct SearchView: View {
     
     var body: some View {
         Background {
+            
             GeometryReader { geometry in
                 VStack(alignment: .leading) {
                     HStack {
