@@ -5,3 +5,7 @@ enum AuthError: Error {
     case missingCache(String)
     case network(String)
 }
+
+enum SpotifyError: Error {
+    case failedToFavourite(String)
+}
