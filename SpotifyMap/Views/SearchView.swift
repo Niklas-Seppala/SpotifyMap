@@ -32,7 +32,7 @@ struct ConfirmSheetView: View {
                     .multilineTextAlignment(.center)
                     .padding(.bottom, 20)
                 
-                SongCard(songName: songName, artist: artist, albumName: albumName, thumbnail: thumbnail)
+                SongCard(songName: songName, artist: artist, albumName: albumName, thumbnail: thumbnail, songId: id)
                     .padding(.bottom, 30)
                 Button(action: {
                     addSongToLocation(locationId: LocationVariables.currentLocationId, spotifySongId: id) {finished in

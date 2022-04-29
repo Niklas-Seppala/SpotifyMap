@@ -1,16 +1,20 @@
 import SwiftUI
 
 struct SongCard: View {
+    @EnvironmentObject var authManager: AuthManager
+    @State var showSpotifySheet = false
     var songName: String
     var artist: String
     var albumName: String
     var thumbnail: String
+    var songId: String
     
-    init(songName: String, artist: String?, albumName: String?, thumbnail: String?) {
+    init(songName: String, artist: String?, albumName: String?, thumbnail: String?, songId: String) {
         self.songName = songName
         self.artist = artist ?? ""
         self.albumName = albumName ?? ""
         self.thumbnail = thumbnail ?? "unknown"
+        self.songId = songId
     }
     
     var body: some View {
@@ -25,6 +29,13 @@ struct SongCard: View {
                     image.resizable()
                 } placeholder: {
                     ProgressView()
+                }
+                // Spotify favourite button. Only for signed in users.
+                .overlay(alignment: .topTrailing) {
+                    if (authManager.isSignedIn) {
+                        SpotifyFavButton(songId: songId)
+                            .padding(5)
+                    }
                 }
                 .frame(width: 220, height: 220)
             }
@@ -43,6 +54,14 @@ struct SongCard: View {
                     .resizable()
                     .scaledToFit()
                     .frame(width: 40, height: 40)
+                    // Open track in Spotify web view.
+                    .sheet(isPresented: $showSpotifySheet) {
+                        Button("Close") { showSpotifySheet = false }.padding()
+                        SpotifyTrackWebView(track: songId)
+                    }
+                    .onTapGesture {
+                        showSpotifySheet = true
+                    }
             }
             .padding(.horizontal, 5)
         }
@@ -62,7 +81,7 @@ struct SongList: View {
                     HStack {
                         ForEach(requestManager.songs, id: \.self) {song in
                             Spacer()
-                            SongCard(songName: song.name, artist: song.artist, albumName: song.albumName, thumbnail: song.albumThumb)
+                            SongCard(songName: song.name, artist: song.artist, albumName: song.albumName, thumbnail: song.albumThumb, songId: song.spotifyID)
                             Spacer()
                         }
                     }

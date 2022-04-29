@@ -32,6 +32,8 @@
 		6AD2297B28104EB1004D0358 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6AD2297D28104EB1004D0358 /* Localizable.strings */; };
 		6AD68AFB2817010200153E78 /* SpotifyAuthButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AD68AFA2817010200153E78 /* SpotifyAuthButton.swift */; };
 		6AD68AFD2817016300153E78 /* VisitorAuthButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AD68AFC2817016300153E78 /* VisitorAuthButton.swift */; };
+		6AD68AFF281AFE4100153E78 /* SpotifyFavButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AD68AFE281AFE4100153E78 /* SpotifyFavButton.swift */; };
+		6AD68B01281C40CA00153E78 /* SpotifyTrackWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AD68B00281C40CA00153E78 /* SpotifyTrackWebView.swift */; };
 		6AD78A51280573320038D67F /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AD78A50280573320038D67F /* HomeView.swift */; };
 /* End PBXBuildFile section */
 
@@ -62,6 +64,8 @@
 		6AD2297E28104EB3004D0358 /* fi */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fi; path = fi.lproj/Localizable.strings; sourceTree = "<group>"; };
 		6AD68AFA2817010200153E78 /* SpotifyAuthButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotifyAuthButton.swift; sourceTree = "<group>"; };
 		6AD68AFC2817016300153E78 /* VisitorAuthButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisitorAuthButton.swift; sourceTree = "<group>"; };
+		6AD68AFE281AFE4100153E78 /* SpotifyFavButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotifyFavButton.swift; sourceTree = "<group>"; };
+		6AD68B00281C40CA00153E78 /* SpotifyTrackWebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotifyTrackWebView.swift; sourceTree = "<group>"; };
 		6AD78A50280573320038D67F /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -168,6 +172,8 @@
 				6A4F8554280DA02200DF8028 /* LoadingView.swift */,
 				6AD68AFA2817010200153E78 /* SpotifyAuthButton.swift */,
 				6AD68AFC2817016300153E78 /* VisitorAuthButton.swift */,
+				6AD68AFE281AFE4100153E78 /* SpotifyFavButton.swift */,
+				6AD68B00281C40CA00153E78 /* SpotifyTrackWebView.swift */,
 			);
 			path = Subviews;
 			sourceTree = "<group>";
@@ -264,6 +270,7 @@
 				6AC496AA2804A0FE007EC954 /* SpotifyAuthView.swift in Sources */,
 				6AD68AFD2817016300153E78 /* VisitorAuthButton.swift in Sources */,
 				6AC4969F28049600007EC954 /* LandingView.swift in Sources */,
+				6AD68AFF281AFE4100153E78 /* SpotifyFavButton.swift in Sources */,
 				6A4F8557280DC03800DF8028 /* Errors.swift in Sources */,
 				6A3AC172280D5E9B005A80C8 /* AuthResponse.swift in Sources */,
 				6AD68AFB2817010200153E78 /* SpotifyAuthButton.swift in Sources */,
@@ -274,6 +281,7 @@
 				6A532ADE2810090100C1DFF4 /* ToastUtils.swift in Sources */,
 				6A4F8555280DA02200DF8028 /* LoadingView.swift in Sources */,
 				6AA56DDF2812FF48006668C0 /* SearchView.swift in Sources */,
+				6AD68B01281C40CA00153E78 /* SpotifyTrackWebView.swift in Sources */,
 				6AD78A51280573320038D67F /* HomeView.swift in Sources */,
 				6AC49686280489D6007EC954 /* SpotifyMapApp.swift in Sources */,
 				6AC496972804925A007EC954 /* Background.swift in Sources */,
