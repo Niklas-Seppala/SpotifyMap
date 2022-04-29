@@ -114,6 +114,7 @@ struct SearchCard: View {
 
 
 struct SearchView: View {
+    @StateObject var speechRecognizer = SpeechRecognizer()
     @State var searchText = ""
     @State var songs: [Song]
     
@@ -121,6 +122,16 @@ struct SearchView: View {
         Background {
             GeometryReader { geometry in
                 VStack(alignment: .leading) {
+                    Button("Search by voice") {
+                        speechRecognizer.reset()
+                        speechRecognizer.transcribe()
+                    }
+                    Button("Search") {
+                        speechRecognizer.stopTranscribing()
+                        getSearchSongs(search: speechRecognizer.transcript) {result in
+                            songs = result
+                        }
+                    }
                     HStack {
                         Image(systemName: "magnifyingglass")
                             .padding(.leading, 12)

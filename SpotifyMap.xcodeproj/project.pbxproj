@@ -11,6 +11,7 @@
 		1F4649E42809B66800B7AA3D /* CircleButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F4649E32809B66800B7AA3D /* CircleButton.swift */; };
 		1F4715EA28147C9800350CD9 /* RequestManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F4715E928147C9800350CD9 /* RequestManager.swift */; };
 		6A3AC172280D5E9B005A80C8 /* AuthResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A3AC171280D5E9B005A80C8 /* AuthResponse.swift */; };
+		6A468EC7281C631F00A76BE2 /* SpeechRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A468EC6281C631F00A76BE2 /* SpeechRecognizer.swift */; };
 		6A4F8555280DA02200DF8028 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A4F8554280DA02200DF8028 /* LoadingView.swift */; };
 		6A4F8557280DC03800DF8028 /* Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A4F8556280DC03800DF8028 /* Errors.swift */; };
 		6A532ADC281005C000C1DFF4 /* PopupView in Frameworks */ = {isa = PBXBuildFile; productRef = 6A532ADB281005C000C1DFF4 /* PopupView */; };
@@ -42,6 +43,7 @@
 		1F4649E32809B66800B7AA3D /* CircleButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleButton.swift; sourceTree = "<group>"; };
 		1F4715E928147C9800350CD9 /* RequestManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestManager.swift; sourceTree = "<group>"; };
 		6A3AC171280D5E9B005A80C8 /* AuthResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthResponse.swift; sourceTree = "<group>"; };
+		6A468EC6281C631F00A76BE2 /* SpeechRecognizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeechRecognizer.swift; sourceTree = "<group>"; };
 		6A4F8554280DA02200DF8028 /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
 		6A4F8556280DC03800DF8028 /* Errors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Errors.swift; sourceTree = "<group>"; };
 		6A532ADD2810090100C1DFF4 /* ToastUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToastUtils.swift; sourceTree = "<group>"; };
@@ -136,6 +138,7 @@
 				6AD78A50280573320038D67F /* HomeView.swift */,
 				6A9302BD280AEB5D00065F2F /* MapViewModel.swift */,
 				6AC496A92804A0FE007EC954 /* SpotifyAuthView.swift */,
+				6A468EC6281C631F00A76BE2 /* SpeechRecognizer.swift */,
 				6AA56DDE2812FF48006668C0 /* SearchView.swift */,
 				6AD2297D28104EB1004D0358 /* Localizable.strings */,
 			);
@@ -275,6 +278,7 @@
 				6A3AC172280D5E9B005A80C8 /* AuthResponse.swift in Sources */,
 				6AD68AFB2817010200153E78 /* SpotifyAuthButton.swift in Sources */,
 				1F4715EA28147C9800350CD9 /* RequestManager.swift in Sources */,
+				6A468EC7281C631F00A76BE2 /* SpeechRecognizer.swift in Sources */,
 				6AC49688280489D6007EC954 /* ContentView.swift in Sources */,
 				1F4649E42809B66800B7AA3D /* CircleButton.swift in Sources */,
 				6AC496A428049997007EC954 /* SpotifyApi.swift in Sources */,
@@ -431,10 +435,12 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"SpotifyMap/Preview Content\"";
-				DEVELOPMENT_TEAM = KLKN859DHX;
+				DEVELOPMENT_TEAM = 656Y3SMLHU;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "SpotifyMap needs your location to show it on the map";
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "Please give microphone permissions";
+				INFOPLIST_KEY_NSSpeechRecognitionUsageDescription = "Please give speech recognition permissions";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -461,10 +467,12 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"SpotifyMap/Preview Content\"";
-				DEVELOPMENT_TEAM = KLKN859DHX;
+				DEVELOPMENT_TEAM = 656Y3SMLHU;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "SpotifyMap needs your location to show it on the map";
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "Please give microphone permissions";
+				INFOPLIST_KEY_NSSpeechRecognitionUsageDescription = "Please give speech recognition permissions";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
