@@ -30,6 +30,9 @@ struct HomeView: View {
                                 }
                         }
                         .frame(height: geometry.size.height - 390)
+                        VStack {
+                            
+                        }
                         CircleButton(xOffset: geometry.size.width - 38, yOffset: -104, action: {
                             viewModel.checkLocationAuthorization()
                         }) {
@@ -46,6 +49,13 @@ struct HomeView: View {
                                 Image(systemName: "plus")
                                     .font(.system(size: 28))
                             }
+                        }
+                        CircleButton(xOffset: geometry.size.width - 38, yOffset: -173, action: {
+                            viewModel.getCenterLocation()
+                            
+                        }) {
+                                Image(systemName: "pin")
+                                    .font(.system(size: 28))
                         }
                         Text(LocalizedStringKey(viewModel.regionName.isEmpty ? " " : "The Sound of \(viewModel.regionName)"))
                             .frame(width: geometry.size.width, alignment: .center)

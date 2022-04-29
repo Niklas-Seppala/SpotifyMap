@@ -25,7 +25,7 @@ class MapViewModel: NSObject, ObservableObject,
         }
         
         resolveRegionName(with: location) { [weak self] locationName in
-            self?.regionName = locationName ?? "(unknown)"
+            self?.regionName = locationName ?? ""
             self?.requestManager.getAreaSongs(area: locationName ?? "Unknown")
         }
     }
@@ -41,6 +41,14 @@ class MapViewModel: NSObject, ObservableObject,
         }
     }
     
+    func getCenterLocation() {
+        let location = CLLocation(latitude: region.center.latitude, longitude: region.center.longitude)
+        resolveRegionName(with: location) { [weak self] locationName in
+            self?.regionName = locationName ?? ""
+            self?.requestManager.getAreaSongs(area: locationName ?? "Unknown")
+        }
+    }
+    
     func checkLocationAuthorization() {
         switch locationManager.authorizationStatus {
             
@@ -50,18 +58,19 @@ class MapViewModel: NSObject, ObservableObject,
             print("location restircted")
         case .denied:
             alertIsPresented = true
-            
             resolveRegionName(with: MapDetails.defaultLocation) { [weak self] locationName in
-                self?.regionName = locationName ?? "(unknown)"
+                self?.regionName = locationName ?? ""
             }
         case .authorizedAlways, .authorizedWhenInUse:
-            region = MKCoordinateRegion(center: locationManager.location!.coordinate, span: MapDetails.defaulSpan)
-            
+            guard let userCoords = locationManager.location?.coordinate else { return }
+            region = MKCoordinateRegion(center: userCoords, span: MapDetails.defaulSpan)
             let location = CLLocation(latitude: region.center.latitude, longitude: region.center.longitude)
+            
             resolveRegionName(with: location) { [weak self] locationName in
-                self?.regionName = locationName ?? "(unknown)"
+                self?.regionName = locationName ?? ""
+                self?.requestManager.getAreaSongs(area: locationName ?? "Unknown")
             }
-
+            
         @unknown default:
             break
         }
@@ -71,13 +80,12 @@ class MapViewModel: NSObject, ObservableObject,
         let geoCoder = CLGeocoder()
 
         geoCoder.reverseGeocodeLocation(location) {placemarks, error in
-            guard let placemark = placemarks?.first, error == nil else {return}
+            guard let placemark = placemarks?.first, error == nil else { return }
             
             var regionName = ""
             
             if let location = placemark.subLocality {
                 regionName = location
-                
             }
             
             completion(regionName)
