@@ -47,6 +47,13 @@ struct HomeView: View {
                                     .font(.system(size: 28))
                             }
                         }
+                        CircleButton(xOffset: geometry.size.width - 38, yOffset: -173, action: {
+                            viewModel.getCenterLocation()
+                            
+                        }) {
+                                Image(systemName: "pin")
+                                    .font(.system(size: 28))
+                        }
                         Text(LocalizedStringKey(viewModel.regionName.isEmpty ? " " : "The Sound of \(viewModel.regionName)"))
                             .frame(width: geometry.size.width, alignment: .center)
                             .font(.title2)
