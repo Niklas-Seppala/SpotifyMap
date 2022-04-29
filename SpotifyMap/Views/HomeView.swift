@@ -37,9 +37,9 @@ struct HomeView: View {
                                 .font(.system(size: 22))
                         }
                         .alert(isPresented: $viewModel.alertIsPresented, content: {
-                            Alert(title: Text("Location Alert"),
-                                  message: Text("Please give location permissions to this app in order to locate you."),
-                                  dismissButton: .default(Text("Cancel")))
+                            Alert(title: Text(LocalizedStringKey("Location Alert")),
+                                  message: Text(LocalizedStringKey("Please give location permissions to this app in order to locate you.")),
+                                  dismissButton: .default(Text("OK")))
                         })
                         CircleButton(xOffset: geometry.size.width - 38, yOffset: -43, action: {}) {
                             NavigationLink(destination: SearchView( songs: [])){
@@ -47,18 +47,28 @@ struct HomeView: View {
                                     .font(.system(size: 28))
                             }
                         }
+
+                        viewModel.regionName == "" ?
+                            Text(LocalizedStringKey("Can't detect a region here."))
+                                .frame(width: geometry.size.width, alignment: .center)
+                                .font(.title2)
+                                .padding(.vertical, 12)
+                                .background(Color.black.opacity(0.3))
+                        :
+                            Text(LocalizedStringKey("The Sound of \(viewModel.regionName)"))
+                                .frame(width: geometry.size.width, alignment: .center)
+                                .font(.title2)
+                                .padding(.vertical, 12)
+                                .background(Color.black.opacity(0.3))
+                    
+
                         CircleButton(xOffset: geometry.size.width - 38, yOffset: -173, action: {
                             viewModel.getCenterLocation()
-                            
                         }) {
                                 Image(systemName: "pin")
                                     .font(.system(size: 28))
                         }
-                        Text(LocalizedStringKey(viewModel.regionName.isEmpty ? " " : "The Sound of \(viewModel.regionName)"))
-                            .frame(width: geometry.size.width, alignment: .center)
-                            .font(.title2)
-                            .padding(.vertical, 12)
-                            .background(Color.black.opacity(0.3))
+
                         SongList(requestManager: viewModel.requestManager)
                     }
                 }

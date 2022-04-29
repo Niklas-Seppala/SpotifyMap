@@ -68,7 +68,7 @@ struct SongList: View {
                     }
                 }.padding(.top, 12)
             } else {
-                Text("No songs found in this area")
+                Text(LocalizedStringKey("No songs found in this area"))
                     .frame(height: 330)
             }
         } else {
