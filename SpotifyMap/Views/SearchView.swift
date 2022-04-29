@@ -1,4 +1,5 @@
 import SwiftUI
+import PopupView
 
 struct ConfirmSheetView: View {
     @Environment(\.dismiss) var dismiss
@@ -116,6 +117,9 @@ struct SearchCard: View {
 struct SearchView: View {
     @State var searchText = ""
     @State var songs: [Song]
+    @State var showingToast = true
+    @State var toastMessage = "Monke"
+    @State var toastStatus = ToastStatus.Error
     
     var body: some View {
         Background {
@@ -173,5 +177,8 @@ struct SearchView: View {
         }
         .preferredColorScheme(.dark)
         .navigationTitle("Search")
+        .popup(isPresented:$showingToast, type:.toast, position: .top, autohideIn: 10.0) {
+            createTopToast(toastText: toastMessage, status: toastStatus)
+        }
     }
 }
