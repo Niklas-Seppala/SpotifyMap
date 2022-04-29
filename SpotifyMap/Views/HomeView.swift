@@ -47,6 +47,7 @@ struct HomeView: View {
                                     .font(.system(size: 28))
                             }
                         }
+
                         viewModel.regionName == "" ?
                             Text(LocalizedStringKey("Can't detect a region here."))
                                 .frame(width: geometry.size.width, alignment: .center)
@@ -60,6 +61,14 @@ struct HomeView: View {
                                 .padding(.vertical, 12)
                                 .background(Color.black.opacity(0.3))
                     
+
+                        CircleButton(xOffset: geometry.size.width - 38, yOffset: -173, action: {
+                            viewModel.getCenterLocation()
+                        }) {
+                                Image(systemName: "pin")
+                                    .font(.system(size: 28))
+                        }
+
                         SongList(requestManager: viewModel.requestManager)
                     }
                 }

@@ -6,6 +6,10 @@ struct ServerMessage: Decodable {
     let res, message: String
 }
 
+struct LocationVariables {
+    static var currentLocationId: Int = 0
+}
+
 struct FetchSingleSong: Codable, Hashable {
     let albumName: String?
     let albumThumb: String?
@@ -63,9 +67,10 @@ class RequestManager: ObservableObject {
                     }
                     return
                 }
-                let response = try! JSONDecoder().decode(FetchResponse.self, from: data)
+                let response = try? JSONDecoder().decode(FetchResponse.self, from: data)
                 DispatchQueue.main.async {
-                    self.songs = response.songs
+                    LocationVariables.currentLocationId = response?.id ?? 0
+                    self.songs = response?.songs.sorted(by: { $0.id > $1.id }) ?? []
                     self.isLoading = false
                 }
             }.resume()
