@@ -30,9 +30,6 @@ struct HomeView: View {
                                 }
                         }
                         .frame(height: geometry.size.height - 390)
-                        VStack {
-                            
-                        }
                         CircleButton(xOffset: geometry.size.width - 38, yOffset: -104, action: {
                             viewModel.checkLocationAuthorization()
                         }) {
