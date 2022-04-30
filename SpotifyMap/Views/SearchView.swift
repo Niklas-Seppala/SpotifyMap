@@ -117,57 +117,66 @@ struct SearchView: View {
     @StateObject var speechRecognizer = SpeechRecognizer()
     @State var searchText = ""
     @State var songs: [Song]
-    @State private var isRecording = false
     
     var body: some View {
         Background {
             GeometryReader { geometry in
                 VStack(alignment: .leading) {
-                    Button("Search by voice") {
-                        if isRecording {
-                            speechRecognizer.stopTranscribing()
-                            isRecording = false
-                            searchText = speechRecognizer.transcript
-                            print("TRANSCRIPT: ", speechRecognizer.transcript)
-                        } else {
-                            speechRecognizer.reset()
-                            speechRecognizer.startVoiceRecognition()
-                            isRecording = true
-                        }
-                    }
-                    .alert(isPresented: $speechRecognizer.VoiceAlertIsPresented, content: {
-                        Alert(title: Text(LocalizedStringKey("Voice Recognition Alert")),
-                              message: Text("\(speechRecognizer.alertMessage)"),
-                              dismissButton: .default(Text("OK")))
-                    })
-
                     HStack {
-                        Image(systemName: "magnifyingglass")
-                            .padding(.leading, 12)
-                            .font(.system(size: 18))
-                        TextField("Search", text: $searchText)
-                            .font(.system(size: 18))
-                            .disableAutocorrection(true)
-                            .onChange(of: searchText, perform: {value in
-                                getSearchSongs(search: searchText) {result in
-                                    songs = result
-                                }
-                            })
-                        if (!searchText.isEmpty) {
-                            Image(systemName: "xmark")
+                        HStack {
+                            Image(systemName: "magnifyingglass")
+                                .padding(.leading, 12)
                                 .font(.system(size: 18))
-                                .padding(.horizontal, 14)
-                                .frame(alignment: .trailing)
-                                .onTapGesture {
-                                    searchText = ""
-                                }
+                            TextField("Search", text: $searchText)
+                                .font(.system(size: 18))
+                                .disableAutocorrection(true)
+                                .onChange(of: searchText, perform: {value in
+                                    getSearchSongs(search: searchText) {result in
+                                        songs = result
+                                    }
+                                })
+                            if (!searchText.isEmpty) {
+                                Image(systemName: "xmark")
+                                    .font(.system(size: 18))
+                                    .padding(.horizontal, 14)
+                                    .frame(alignment: .trailing)
+                                    .onTapGesture {
+                                        searchText = ""
+                                    }
+                            }
                         }
-                    }
-                    .padding(.vertical, 14)
-                    .overlay(
-                        RoundedRectangle(cornerRadius: 12)
-                            .stroke(Color.white, lineWidth: 1))
+                        .padding(.vertical, 14)
+                        .overlay(
+                            RoundedRectangle(cornerRadius: 12)
+                                .stroke(Color.white, lineWidth: 1))
                     
+                        Button(action: {
+                            withAnimation(.spring(response: 0.4, dampingFraction: 0.3, blendDuration: 0.3)){
+                                speechRecognizer.isRecording.toggle()
+                                speechRecognizer.isRecording ? {
+                                    speechRecognizer.reset();
+                                    speechRecognizer.startVoiceRecognition()}()
+                                :
+                                {speechRecognizer.stopVoiceRecognition()
+                                searchText = speechRecognizer.outputText
+                                    print("Speech-to-Text: ", speechRecognizer.outputText)}()
+                            }
+                        })
+                        {
+                            Image(systemName: "waveform")
+                                .resizable()
+                                .frame(width: 30, height: 30)
+                                .foregroundColor(.white)
+                                .background(speechRecognizer.isRecording ? Circle().foregroundColor(.red).frame(width: 65, height: 65) : Circle().foregroundColor(Color(hex: 0x38165c)).frame(width: 50, height: 50))
+                        }
+                        .alert(isPresented: $speechRecognizer.VoiceAlertIsPresented, content: {
+                            Alert(title: Text(LocalizedStringKey("Voice Recognition Alert")),
+                                  message: Text("\(speechRecognizer.alertMessage)"),
+                                  dismissButton: .default(Text("OK")))
+                        })
+                        .padding(8)
+                    }
+            
                     if(!searchText.isEmpty) {
                         Text(LocalizedStringKey("Showing \(songs.count) results"))
                             .padding(.vertical, 6)
@@ -192,5 +201,11 @@ struct SearchView: View {
         }
         .preferredColorScheme(.dark)
         .navigationTitle("Search")
+    }
+}
+
+struct SearchView_Preview: PreviewProvider {
+    static var previews: some View {
+        SearchView(songs: [])
     }
 }

@@ -21,9 +21,10 @@ class SpeechRecognizer: ObservableObject {
         }
     }
     
-    var transcript: String = ""
+    var outputText: String = ""
     var alertMessage: String = ""
-    @Published var VoiceAlertIsPresented = false
+    @Published var VoiceAlertIsPresented: Bool = false
+    @Published var isRecording: Bool = false
     
     private var audioEngine: AVAudioEngine?
     private var request: SFSpeechAudioBufferRecognitionRequest?
@@ -73,7 +74,7 @@ class SpeechRecognizer: ObservableObject {
         }
     }
     
-    func stopTranscribing() {
+    func stopVoiceRecognition() {
         reset()
     }
     
@@ -121,8 +122,8 @@ class SpeechRecognizer: ObservableObject {
     }
     
     private func speak(_ message: String) {
-        transcript = message
-        print(transcript)
+        outputText = message
+        print("OUTPUT: ", outputText)
     }
     
     private func errorHandler(_ error: Error) {
