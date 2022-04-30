@@ -13,7 +13,7 @@ class MapViewModel: NSObject, ObservableObject,
     @Published var regionName = ""
     @Published var requestManager = RequestManager()
     @Published var locationManager = CLLocationManager()
-    @Published var alertIsPresented = false
+    @Published var MapAlertIsPresented = false
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         guard let location = locations.first else {
@@ -57,7 +57,7 @@ class MapViewModel: NSObject, ObservableObject,
         case .restricted:
             print("location restircted")
         case .denied:
-            alertIsPresented = true
+            MapAlertIsPresented = true
             resolveRegionName(with: MapDetails.defaultLocation) { [weak self] locationName in
                 self?.regionName = locationName ?? ""
             }

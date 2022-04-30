@@ -439,8 +439,8 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "SpotifyMap needs your location to show it on the map";
-				INFOPLIST_KEY_NSMicrophoneUsageDescription = "Please give microphone permissions";
-				INFOPLIST_KEY_NSSpeechRecognitionUsageDescription = "Please give speech recognition permissions";
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "Please provide microphone permissions to use vice search";
+				INFOPLIST_KEY_NSSpeechRecognitionUsageDescription = "Please provide speech recognition to use voice search";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -471,8 +471,8 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "SpotifyMap needs your location to show it on the map";
-				INFOPLIST_KEY_NSMicrophoneUsageDescription = "Please give microphone permissions";
-				INFOPLIST_KEY_NSSpeechRecognitionUsageDescription = "Please give speech recognition permissions";
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "Please provide microphone permissions to use vice search";
+				INFOPLIST_KEY_NSSpeechRecognitionUsageDescription = "Please provide speech recognition to use voice search";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;

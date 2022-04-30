@@ -10,3 +10,4 @@
 "No songs found in this area" = "Kappaleita ei löytynyt tässä sijainnissa";
 "Showing %d results"    = "Löydetty %d tulosta";
 "Can't detect a region here." = "Aluetta ei voidaan tunnistaa tässä.";
+"Voice Recognition Alert" = "Äänentunnistushälitys";

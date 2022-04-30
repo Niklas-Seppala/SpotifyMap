@@ -22,6 +22,8 @@ class SpeechRecognizer: ObservableObject {
     }
     
     var transcript: String = ""
+    var alertMessage: String = ""
+    @Published var VoiceAlertIsPresented = false
     
     private var audioEngine: AVAudioEngine?
     private var request: SFSpeechAudioBufferRecognitionRequest?
@@ -30,7 +32,13 @@ class SpeechRecognizer: ObservableObject {
     
     init() {
         recognizer = SFSpeechRecognizer()
-        
+    }
+    
+    deinit {
+        reset()
+    }
+    
+    func startVoiceRecognition() {
         Task(priority: .background) {
             do {
                 guard recognizer != nil else {
@@ -43,19 +51,13 @@ class SpeechRecognizer: ObservableObject {
                     throw RecognizerError.notPermittedToRecord
                 }
             } catch {
-                speakError(error)
+                errorHandler(error)
             }
         }
-    }
-    
-    deinit {
-        reset()
-    }
-    
-    func transcribe() {
+        
         DispatchQueue(label: "Speech Recognizer Queue", qos: .background).async { [weak self] in
             guard let self = self, let recognizer = self.recognizer, recognizer.isAvailable else {
-                self?.speakError(RecognizerError.recognizerIsUnavailable)
+                self?.errorHandler(RecognizerError.recognizerIsUnavailable)
                 return
             }
             
@@ -66,7 +68,7 @@ class SpeechRecognizer: ObservableObject {
                 self.task = recognizer.recognitionTask(with: request, resultHandler: self.recognitionHandler(result:error:))
             } catch {
                 self.reset()
-                self.speakError(error)
+                self.errorHandler(error)
             }
         }
     }
@@ -123,14 +125,17 @@ class SpeechRecognizer: ObservableObject {
         print(transcript)
     }
     
-    private func speakError(_ error: Error) {
+    private func errorHandler(_ error: Error) {
         var errorMessage = ""
         if let error = error as? RecognizerError {
             errorMessage += error.message
         } else {
             errorMessage += error.localizedDescription
         }
-        transcript = "<< \(errorMessage) >>"
+        alertMessage = errorMessage
+        DispatchQueue.main.async {
+            self.VoiceAlertIsPresented = true
+        }
     }
 }
 

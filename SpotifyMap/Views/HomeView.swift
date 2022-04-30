@@ -47,7 +47,7 @@ struct HomeView: View {
                             Image(systemName: "location.fill")
                                 .font(.system(size: 22))
                         }
-                        .alert(isPresented: $viewModel.alertIsPresented, content: {
+                        .alert(isPresented: $viewModel.MapAlertIsPresented, content: {
                             Alert(title: Text(LocalizedStringKey("Location Alert")),
                                   message: Text(LocalizedStringKey("Please give location permissions to this app in order to locate you.")),
                                   dismissButton: .default(Text("OK")))

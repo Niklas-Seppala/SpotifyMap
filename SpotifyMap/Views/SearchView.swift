@@ -117,19 +117,30 @@ struct SearchView: View {
     @StateObject var speechRecognizer = SpeechRecognizer()
     @State var searchText = ""
     @State var songs: [Song]
+    @State private var isRecording = false
     
     var body: some View {
         Background {
             GeometryReader { geometry in
                 VStack(alignment: .leading) {
                     Button("Search by voice") {
-                        speechRecognizer.reset()
-                        speechRecognizer.transcribe()
+                        if isRecording {
+                            speechRecognizer.stopTranscribing()
+                            isRecording = false
+                            searchText = speechRecognizer.transcript
+                            print("TRANSCRIPT: ", speechRecognizer.transcript)
+                        } else {
+                            speechRecognizer.reset()
+                            speechRecognizer.startVoiceRecognition()
+                            isRecording = true
+                        }
                     }
-                    Button("Search") {
-                        speechRecognizer.stopTranscribing()
-                        searchText = speechRecognizer.transcript
-                    }
+                    .alert(isPresented: $speechRecognizer.VoiceAlertIsPresented, content: {
+                        Alert(title: Text(LocalizedStringKey("Voice Recognition Alert")),
+                              message: Text("\(speechRecognizer.alertMessage)"),
+                              dismissButton: .default(Text("OK")))
+                    })
+
                     HStack {
                         Image(systemName: "magnifyingglass")
                             .padding(.leading, 12)
