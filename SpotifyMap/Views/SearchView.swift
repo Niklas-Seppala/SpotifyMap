@@ -123,6 +123,7 @@ struct SearchView: View {
             GeometryReader { geometry in
                 VStack(alignment: .leading) {
                     HStack {
+                        // Search field view.
                         HStack {
                             Image(systemName: "magnifyingglass")
                                 .padding(.leading, 12)
@@ -149,7 +150,8 @@ struct SearchView: View {
                         .overlay(
                             RoundedRectangle(cornerRadius: 12)
                                 .stroke(Color.white, lineWidth: 1))
-                    
+                        // Button that toggles voice recognition and assigns the outputText to
+                        // the search field. Shows an alert if there are any errors.
                         Button(action: {
                             withAnimation(.spring(response: 0.4, dampingFraction: 0.3, blendDuration: 0.3)){
                                 speechRecognizer.isRecording.toggle()
@@ -177,7 +179,8 @@ struct SearchView: View {
                         })
                         .padding(8)
                     }
-            
+                    // If text is inserted to the text field show the results count and render
+                    // a SearchCard component for each song that is found.
                     if(!searchText.isEmpty) {
                         Text(LocalizedStringKey("Showing \(songs.count) results"))
                             .padding(.vertical, 6)

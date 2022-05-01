@@ -3,8 +3,10 @@ import Foundation
 import Speech
 import SwiftUI
 
-
+// Class for converting speech to text using SFSpeechRecognizer and AVAudioEngine.
 class SpeechRecognizer: ObservableObject {
+    
+    // Enum for defining the errors.
     enum RecognizerError: Error {
         case nilRecognizer
         case notAuthorizedToRecognize
@@ -31,6 +33,7 @@ class SpeechRecognizer: ObservableObject {
     private var task: SFSpeechRecognitionTask?
     private let recognizer: SFSpeechRecognizer?
     
+    // Initialize a new speech recognizer.
     init() {
         recognizer = SFSpeechRecognizer()
     }
@@ -39,6 +42,8 @@ class SpeechRecognizer: ObservableObject {
         reset()
     }
     
+    // Functino that requests access to the speech recognizer and the microphone then start recognition.
+    // Creates a SFSpeechRecognitionTask that converts speech to text until the stopVoiceRecognition is called.
     func startVoiceRecognition() {
         isRecording = true
         Task(priority: .background) {
@@ -75,10 +80,12 @@ class SpeechRecognizer: ObservableObject {
         }
     }
     
+    // Stopping voice recognition.
     func stopVoiceRecognition() {
         reset()
     }
     
+    // Resetting the recognizer.
     func reset() {
         task?.cancel()
         audioEngine?.stop()
@@ -88,6 +95,7 @@ class SpeechRecognizer: ObservableObject {
         isRecording = false
     }
     
+    // Prepares the audio engine.
     private static func prepareEngine() throws -> (AVAudioEngine, SFSpeechAudioBufferRecognitionRequest) {
         let audioEngine = AVAudioEngine()
         
@@ -109,6 +117,7 @@ class SpeechRecognizer: ObservableObject {
         return (audioEngine, request)
     }
     
+    // Gets the speech to text result.
     private func recognitionHandler(result: SFSpeechRecognitionResult?, error: Error?) {
         let receivedFinalResult = result?.isFinal ?? false
         let receivedError = error != nil
@@ -123,11 +132,13 @@ class SpeechRecognizer: ObservableObject {
         }
     }
     
+    // Assigns the converted speech to the the published outputText variable.
     private func speak(_ message: String) {
         outputText = message
         print("OUTPUT: ", outputText)
     }
     
+    // Gets any errors and assigns it to the alertMessage variable.
     private func errorHandler(_ error: Error) {
         var errorMessage = ""
         if let error = error as? RecognizerError {
