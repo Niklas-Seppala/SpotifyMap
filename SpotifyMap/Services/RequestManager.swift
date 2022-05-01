@@ -48,6 +48,7 @@ struct FetchResponse: Codable {
 class RequestManager: ObservableObject {
     @Published var isLoading = true
     @Published var songs = [FetchSingleSong]()
+    @Published var show = false
     
     func getAreaSongs(area: String) {
         guard let url = URL(string: "http://10.114.34.4/app/app/location/\"\(area.replacingOccurrences(of: "ä", with: "a"))\"".replacingOccurrences(of: "\"", with: "")) else {
@@ -79,8 +80,10 @@ class RequestManager: ObservableObject {
                             if(self.isLoading == true){
                                 task.cancel()
                                 self.isLoading =  false
+                                self.show = true
                             }
-                        })
+                    }
+            )
         }
     }
 }
