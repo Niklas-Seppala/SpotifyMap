@@ -34,6 +34,9 @@ struct HomeView: View {
                                 .onAppear {
                                     locationManager.requestLocation()
                                 }
+                                .onDisappear {
+                                    speechRecognizer.stopVoiceRecognition()
+                                }
                         }
                         .frame(height: geometry.size.height - 390)
                         

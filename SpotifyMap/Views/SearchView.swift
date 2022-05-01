@@ -136,6 +136,9 @@ struct SearchView: View {
                                         songs = result
                                     }
                                 })
+                                .onDisappear {
+                                    speechRecognizer.stopVoiceRecognition()
+                                }
                             if (!searchText.isEmpty) {
                                 Image(systemName: "xmark")
                                     .font(.system(size: 18))
