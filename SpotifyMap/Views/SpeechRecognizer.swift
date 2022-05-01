@@ -136,8 +136,8 @@ class SpeechRecognizer: ObservableObject {
             errorMessage += error.localizedDescription
         }
         alertMessage = errorMessage
-        isRecording = false
         DispatchQueue.main.async {
+            self.isRecording = false
             self.VoiceAlertIsPresented = true
         }
     }
