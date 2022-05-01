@@ -153,13 +153,14 @@ struct SearchView: View {
                         Button(action: {
                             withAnimation(.spring(response: 0.4, dampingFraction: 0.3, blendDuration: 0.3)){
                                 speechRecognizer.isRecording.toggle()
-                                speechRecognizer.isRecording ? {
-                                    speechRecognizer.reset();
-                                    speechRecognizer.startVoiceRecognition()}()
-                                :
-                                {speechRecognizer.stopVoiceRecognition()
-                                searchText = speechRecognizer.outputText
-                                    print("Speech-to-Text: ", speechRecognizer.outputText)}()
+                                if speechRecognizer.isRecording {
+                                    speechRecognizer.reset()
+                                    speechRecognizer.startVoiceRecognition()
+                                } else {
+                                    speechRecognizer.stopVoiceRecognition()
+                                    searchText = speechRecognizer.outputText
+                                    print("Speech-to-Text: ", speechRecognizer.outputText)
+                                }
                             }
                         })
                         {

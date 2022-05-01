@@ -40,6 +40,7 @@ class SpeechRecognizer: ObservableObject {
     }
     
     func startVoiceRecognition() {
+        isRecording = true
         Task(priority: .background) {
             do {
                 guard recognizer != nil else {
@@ -84,6 +85,7 @@ class SpeechRecognizer: ObservableObject {
         audioEngine = nil
         request = nil
         task = nil
+        isRecording = false
     }
     
     private static func prepareEngine() throws -> (AVAudioEngine, SFSpeechAudioBufferRecognitionRequest) {
@@ -134,6 +136,7 @@ class SpeechRecognizer: ObservableObject {
             errorMessage += error.localizedDescription
         }
         alertMessage = errorMessage
+        isRecording = false
         DispatchQueue.main.async {
             self.VoiceAlertIsPresented = true
         }
