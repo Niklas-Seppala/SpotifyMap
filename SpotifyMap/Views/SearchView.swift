@@ -168,7 +168,7 @@ struct SearchView: View {
                                 .resizable()
                                 .frame(width: 30, height: 30)
                                 .foregroundColor(.white)
-                                .background(speechRecognizer.isRecording ? Circle().foregroundColor(.red).frame(width: 65, height: 65) : Circle().foregroundColor(Color(hex: 0x38165c)).frame(width: 50, height: 50))
+                                .background(speechRecognizer.isRecording ? Circle().foregroundColor(.red).frame(width: 65, height: 65) : Circle().foregroundColor(Color(hex: 0x461c73)).frame(width: 50, height: 50))
                         }
                         .alert(isPresented: $speechRecognizer.VoiceAlertIsPresented, content: {
                             Alert(title: Text(LocalizedStringKey("Voice Recognition Alert")),

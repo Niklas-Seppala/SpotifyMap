@@ -10,6 +10,7 @@
 		1F4649DC2809980D00B7AA3D /* SongList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F4649DB2809980D00B7AA3D /* SongList.swift */; };
 		1F4649E42809B66800B7AA3D /* CircleButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F4649E32809B66800B7AA3D /* CircleButton.swift */; };
 		1F4715EA28147C9800350CD9 /* RequestManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F4715E928147C9800350CD9 /* RequestManager.swift */; };
+		6A043E70281EAA0A00C091C8 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6A043E72281EAA0A00C091C8 /* InfoPlist.strings */; };
 		6A3AC172280D5E9B005A80C8 /* AuthResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A3AC171280D5E9B005A80C8 /* AuthResponse.swift */; };
 		6A468EC7281C631F00A76BE2 /* SpeechRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A468EC6281C631F00A76BE2 /* SpeechRecognizer.swift */; };
 		6A4F8555280DA02200DF8028 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A4F8554280DA02200DF8028 /* LoadingView.swift */; };
@@ -42,6 +43,8 @@
 		1F4649DB2809980D00B7AA3D /* SongList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SongList.swift; sourceTree = "<group>"; };
 		1F4649E32809B66800B7AA3D /* CircleButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleButton.swift; sourceTree = "<group>"; };
 		1F4715E928147C9800350CD9 /* RequestManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestManager.swift; sourceTree = "<group>"; };
+		6A043E71281EAA0A00C091C8 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		6A043E73281EAA0D00C091C8 /* fi */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fi; path = fi.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		6A3AC171280D5E9B005A80C8 /* AuthResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthResponse.swift; sourceTree = "<group>"; };
 		6A468EC6281C631F00A76BE2 /* SpeechRecognizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeechRecognizer.swift; sourceTree = "<group>"; };
 		6A4F8554280DA02200DF8028 /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
@@ -140,6 +143,7 @@
 				6AC496A92804A0FE007EC954 /* SpotifyAuthView.swift */,
 				6A468EC6281C631F00A76BE2 /* SpeechRecognizer.swift */,
 				6AA56DDE2812FF48006668C0 /* SearchView.swift */,
+				6A043E72281EAA0A00C091C8 /* InfoPlist.strings */,
 				6AD2297D28104EB1004D0358 /* Localizable.strings */,
 			);
 			path = Views;
@@ -256,6 +260,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6AC4968D280489D8007EC954 /* Preview Assets.xcassets in Resources */,
+				6A043E70281EAA0A00C091C8 /* InfoPlist.strings in Resources */,
 				6AD2297B28104EB1004D0358 /* Localizable.strings in Resources */,
 				6AC4968A280489D8007EC954 /* Assets.xcassets in Resources */,
 			);
@@ -299,6 +304,15 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
+		6A043E72281EAA0A00C091C8 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				6A043E71281EAA0A00C091C8 /* en */,
+				6A043E73281EAA0D00C091C8 /* fi */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
 		6AD2297D28104EB1004D0358 /* Localizable.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -438,8 +452,8 @@
 				DEVELOPMENT_TEAM = 656Y3SMLHU;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "SpotifyMap needs your location to show it on the map";
-				INFOPLIST_KEY_NSMicrophoneUsageDescription = "Please provide microphone permissions to use vice search";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Please provide location permissions in order to locate you.";
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "Please provide microphone permission in order to use voice search.";
 				INFOPLIST_KEY_NSSpeechRecognitionUsageDescription = "Please provide speech recognition to use voice search";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -470,8 +484,8 @@
 				DEVELOPMENT_TEAM = 656Y3SMLHU;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "SpotifyMap needs your location to show it on the map";
-				INFOPLIST_KEY_NSMicrophoneUsageDescription = "Please provide microphone permissions to use vice search";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Please provide location permissions in order to locate you.";
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "Please provide microphone permission in order to use voice search.";
 				INFOPLIST_KEY_NSSpeechRecognitionUsageDescription = "Please provide speech recognition to use voice search";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;

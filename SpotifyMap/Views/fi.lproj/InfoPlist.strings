@@ -1,0 +1,3 @@
+"NSLocationWhenInUseUsageDescription" = "Anna sijaintilupa löytääksesi sinut.";
+"NSMicrophoneUsageDescription" = "Anna mikrofonin käyttöoikeus, jotta voit käyttää puhehaku.";
+"NSSpeechRecognitionUsageDescription"  = "Anna puheentunnistuslupa käyttääksesi puhehaku.";

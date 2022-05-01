@@ -49,7 +49,7 @@ struct HomeView: View {
                         }
                         .alert(isPresented: $viewModel.MapAlertIsPresented, content: {
                             Alert(title: Text(LocalizedStringKey("Location Alert")),
-                                  message: Text(LocalizedStringKey("Please give location permissions to this app in order to locate you.")),
+                                  message: Text(LocalizedStringKey("Please provide location permissions to this app in order to locate you.")),
                                   dismissButton: .default(Text("OK")))
                         })
                         CircleButton(xOffset: geometry.size.width - 38, yOffset: -43, action: {}) {
