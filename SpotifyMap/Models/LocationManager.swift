@@ -7,6 +7,12 @@ enum MapDetails {
     static let defaultLocation = CLLocation(latitude: 60.224305, longitude: 24.757239)
 }
 
+// Location model
+struct Location {
+    let title: String
+    let coordinates: CLLocationCoordinate2D
+}
+
 // Class that handles all the location functionalities.
 class LocationManager: NSObject, ObservableObject,
                                 CLLocationManagerDelegate {
@@ -105,6 +111,51 @@ class LocationManager: NSObject, ObservableObject,
             }
             
             completion(regionName)
+        }
+    }
+    
+    // Gets coords and name of searched region by speech from the Location model.
+    // Re-centers the map for that region and searches for the songs.
+    func getRegionByVoice(_ speechToText: String) {
+        resolveRegionCoordinates(with: speechToText) { [weak self] locations in
+            if locations.indices.contains(0) {
+                let locationCoords = locations[0].coordinates
+                let locationName = locations[0].title
+                
+                self?.region = MKCoordinateRegion(center: locationCoords, span: MapDetails.defaulSpan)
+                self?.regionName = locationName
+                self?.requestManager.getAreaSongs(area: locationName)
+            }
+
+        }
+    }
+    
+    // Using geocoding gets region coordinates and also resolve the region name.
+    func resolveRegionCoordinates(with query: String, completion: @escaping (([Location]) -> Void)) {
+        let geoCodeer = CLGeocoder()
+        
+        geoCodeer.geocodeAddressString(query) { places, error in
+            guard let places = places, error == nil else {
+               completion([])
+                return
+            }
+            
+            // Convert locations to the Location model.
+            let models: [Location] = places.compactMap({ place in
+                var name = ""
+                if let locationName = place.subLocality {
+                    name = locationName
+                }
+                
+                let result  = Location(
+                    title: name,
+                    coordinates: place.location!.coordinate
+                )
+                
+                return result
+            })
+            
+            completion(models)
         }
     }
     

@@ -6,6 +6,7 @@ import WebKit
 
 struct HomeView: View {
     @StateObject var locationManager = LocationManager()
+    @StateObject var speechRecognizer = SpeechRecognizer()
     @EnvironmentObject var authManager: AuthManager
     @State var showingToast = false
     @State var toastMessage = ""
@@ -58,6 +59,36 @@ struct HomeView: View {
                                 Image(systemName: "plus")
                                     .font(.system(size: 28))
                             }
+                        }
+                        // Voice recognition button for searching regions
+                        CircleButton(xOffset: geometry.size.width - 100, yOffset: -43, action: {
+                            locationManager.getCenterLocation()
+                        }) {
+                            Button(action: {
+                                withAnimation(.spring(response: 0.4, dampingFraction: 0.3, blendDuration: 0.3)){
+                                    speechRecognizer.isRecording.toggle()
+                                    if speechRecognizer.isRecording {
+                                        speechRecognizer.reset()
+                                        speechRecognizer.startVoiceRecognition()
+                                    } else {
+                                        speechRecognizer.stopVoiceRecognition()
+                                        locationManager.getRegionByVoice(speechRecognizer.outputText)
+                                        print("Speech-to-Text: ", speechRecognizer.outputText)
+                                    }
+                                }
+                            })
+                            {
+                                Image(systemName: "waveform")
+                                    .resizable()
+                                    .frame(width: 30, height: 30)
+                                    .foregroundColor(.white)
+                                    .background(speechRecognizer.isRecording ? Circle().foregroundColor(.red).frame(width: 65, height: 65) : Circle().foregroundColor(Color(hex: 0x461c73)).frame(width: 50, height: 50))
+                            }
+                            .alert(isPresented: $speechRecognizer.VoiceAlertIsPresented, content: {
+                                Alert(title: Text(LocalizedStringKey("Voice Recognition Alert")),
+                                      message: Text(LocalizedStringKey("\(speechRecognizer.alertMessage)")),
+                                      dismissButton: .default(Text("OK")))
+                            })
                         }
                         // Gets region name fomr locationManager and renders it if found
                         locationManager.regionName == "" ?
