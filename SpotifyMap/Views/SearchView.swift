@@ -174,7 +174,7 @@ struct SearchView: View {
                         }
                         .alert(isPresented: $speechRecognizer.VoiceAlertIsPresented, content: {
                             Alert(title: Text(LocalizedStringKey("Voice Recognition Alert")),
-                                  message: Text("\(speechRecognizer.alertMessage)"),
+                                  message: Text(LocalizedStringKey("\(speechRecognizer.alertMessage)")),
                                   dismissButton: .default(Text("OK")))
                         })
                         .padding(8)
