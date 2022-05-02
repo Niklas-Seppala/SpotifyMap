@@ -14,6 +14,7 @@ class MapViewModel: NSObject, ObservableObject,
     @Published var requestManager = RequestManager()
     @Published var locationManager = CLLocationManager()
     @Published var alertIsPresented = false
+    @Published var err = false
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         guard let location = locations.first else {
@@ -26,7 +27,9 @@ class MapViewModel: NSObject, ObservableObject,
         
         resolveRegionName(with: location) { [weak self] locationName in
             self?.regionName = locationName ?? ""
-            self?.requestManager.getAreaSongs(area: locationName ?? "Unknown")
+            self?.requestManager.getAreaSongs(area: locationName ?? "Unknown"){error in
+                self?.err = error
+            }
         }
     }
     
@@ -45,7 +48,10 @@ class MapViewModel: NSObject, ObservableObject,
         let location = CLLocation(latitude: region.center.latitude, longitude: region.center.longitude)
         resolveRegionName(with: location) { [weak self] locationName in
             self?.regionName = locationName ?? ""
-            self?.requestManager.getAreaSongs(area: locationName ?? "Unknown")
+            self?.requestManager.getAreaSongs(area: locationName ?? "Unknown"){error in
+                self?.err = error
+                
+            }
         }
     }
     
@@ -68,7 +74,9 @@ class MapViewModel: NSObject, ObservableObject,
             
             resolveRegionName(with: location) { [weak self] locationName in
                 self?.regionName = locationName ?? ""
-                self?.requestManager.getAreaSongs(area: locationName ?? "Unknown")
+                self?.requestManager.getAreaSongs(area: locationName ?? "Unknown"){error in
+                    self?.err = error
+                }
             }
             
         @unknown default:

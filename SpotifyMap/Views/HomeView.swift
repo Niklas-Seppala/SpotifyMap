@@ -83,12 +83,6 @@ struct HomeView: View {
             if authManager.isSignedIn {
                 showToastMessage(toastText: "Connected with Spotify", status: .Success)
             }
-            DispatchQueue.main.asyncAfter(deadline: .now() + 6.0 , execute: {
-                    if(viewModel.requestManager.show){
-                        showToastMessage(toastText: "Network Error", status: .Error)
-                    }
-                }
-            )
         }
     }
 }

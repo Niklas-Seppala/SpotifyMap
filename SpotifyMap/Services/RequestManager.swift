@@ -45,12 +45,13 @@ struct FetchResponse: Codable {
     }
 }
 
+
 class RequestManager: ObservableObject {
     @Published var isLoading = true
     @Published var songs = [FetchSingleSong]()
-    @Published var show = false
+    @Published var err = false
     
-    func getAreaSongs(area: String) {
+    func getAreaSongs(area: String, completion: @escaping (Bool) -> Void) {
         guard let url = URL(string: "http://10.114.34.4/app/app/location/\"\(area.replacingOccurrences(of: "ä", with: "a"))\"".replacingOccurrences(of: "\"", with: "")) else {
             print("invalid url")
             DispatchQueue.main.async {
@@ -62,6 +63,13 @@ class RequestManager: ObservableObject {
         request.httpMethod = "POST"
         DispatchQueue.main.async {
             let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
+                guard error == nil else {
+                    completion(true)
+                    DispatchQueue.main.async {
+                        self.isLoading = false
+                    }
+                         return
+                }
                 guard let data = data else {
                     DispatchQueue.main.async {
                         self.isLoading = false
@@ -76,14 +84,6 @@ class RequestManager: ObservableObject {
                 }
             }
             task.resume()
-            DispatchQueue.main.asyncAfter(deadline: .now() + 5.0 , execute: {
-                            if(self.isLoading == true){
-                                task.cancel()
-                                self.isLoading =  false
-                                self.show = true
-                            }
-                    }
-            )
         }
     }
 }
