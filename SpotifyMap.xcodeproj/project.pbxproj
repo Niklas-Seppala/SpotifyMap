@@ -140,7 +140,6 @@
 				6AC4969B28049403007EC954 /* Subviews */,
 				6AC49687280489D6007EC954 /* ContentView.swift */,
 				6AC4969E28049600007EC954 /* LandingView.swift */,
-				6A498A66281FB226005728DF /* MapViewModel.swift */,
 				6AD78A50280573320038D67F /* HomeView.swift */,
 				6AC496A92804A0FE007EC954 /* SpotifyAuthView.swift */,
 				6AA56DDE2812FF48006668C0 /* SearchView.swift */,
@@ -299,7 +298,6 @@
 				6A9302BE280AEB5D00065F2F /* LocationManager.swift in Sources */,
 				6AC496A6280499BA007EC954 /* BackendApi.swift in Sources */,
 				6AC4969D28049435007EC954 /* ShadowRect.swift in Sources */,
-				6A498A67281FB226005728DF /* MapViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -451,7 +449,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"SpotifyMap/Preview Content\"";
-				DEVELOPMENT_TEAM = 656Y3SMLHU;
+				DEVELOPMENT_TEAM = MQU7AW4SWS;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Please provide location permissions in order to locate you.";
@@ -467,7 +465,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.group5.SpotifyMap;
+				PRODUCT_BUNDLE_IDENTIFIER = com.group5.SpotifyMap2;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;

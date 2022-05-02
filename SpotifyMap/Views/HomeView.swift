@@ -116,7 +116,7 @@ struct HomeView: View {
                             print("SongList onAppear!")
                             
                             //showToastMessage(toastText: "onAppear", status: .Error)
-                            responseCancellable = viewModel.$response.sink(receiveValue: {
+                            responseCancellable = locationManager.$response.sink(receiveValue: {
                               resp in
                                 if(resp?.statusCode != nil && resp?.statusCode != 200) {
                                     print("homeview resp sink code \(resp)")
@@ -125,7 +125,7 @@ struct HomeView: View {
                                 }
                             })
                             
-                            errorCancellable = viewModel.$err.sink(receiveValue: {
+                            errorCancellable = locationManager.$err.sink(receiveValue: {
                               err in
                                 print("receive error sink \(err)")
                                 if(err != nil) {

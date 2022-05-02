@@ -144,7 +144,10 @@ class LocationManager: NSObject, ObservableObject,
                 
                 self?.region = MKCoordinateRegion(center: locationCoords, span: MapDetails.defaulSpan)
                 self?.regionName = locationName
-                self?.requestManager.getAreaSongs(area: locationName)
+                self?.requestManager.getAreaSongs(area: locationName){
+                    resp, error in
+                        self?.requestCompletion(resp: resp, error: error)
+                }
             }
 
         }
