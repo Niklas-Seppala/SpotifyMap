@@ -1,14 +1,14 @@
 
 
-"Connect your"          = "Yhdistä sinun";
-"Continue as a guest"   = "Jatka vieraana";
+"Connect your"          = "Yhdistä";
+"Continue as a guest"   = "Jatka ilman tunnistautumista";
 "with limited features" = "rajoitetuille ominaisuuksilla";
-"The Sound of %@"       = "%@ ääni";
-"Please provide location permissions to this app in order to locate you." = "Anna sovellukselle sijaintilupa paikantaaksesi sinut.";
-"Location Alert"        = "Sijaintihälytys";
+"The Sound of %@"       = "%@";
+"Please provide location permissions to this app in order to locate you." = "Tarvitsemme sijainnin käyttöluvan sijaintisi paikantamiseksi.";
+"Location Alert"        = "Sijainnin käyttölupapyyntö";
 "Search"                = "Hae";
-"No songs found in this area" = "Kappaleita ei löytynyt tässä sijainnissa";
-"Showing %d results"    = "Löydetty %d tulosta";
-"Can't detect a region here." = "Aluetta ei voidaan tunnistaa tässä.";
-"Voice Recognition Alert" = "Äänentunnistushälitys";
-"%@" = "Tunnistaja ei ole käytettävissä. Tarkista mikrofonin ja puheentunnistuken käyttöoikeudet.";
+"No songs found in this area" = "Kappaleita ei löytynyt täältä";
+"Showing %d results"    = "Näytetään %d tulosta";
+"Can't detect a region here." = "Aluetta ei tunnistettu";
+"Voice Recognition Alert" = "Äänentunnistuksen käyttölupapyyntö";
+"%@" = "Puheentunnistusta ei voitu ottaa käyttöön. Tarkista mikrofonin ja puheentunnistuken käyttöluvat.";
