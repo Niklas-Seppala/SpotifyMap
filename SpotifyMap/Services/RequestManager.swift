@@ -70,6 +70,7 @@ class RequestManager: ObservableObject {
                 guard (error == nil && httpResponse?.statusCode == 200) else {
                     print("Running completion")
                     completion(httpResponse, error)
+                    self.songs = []
                     DispatchQueue.main.async {
                         self.isLoading = false
                     }
