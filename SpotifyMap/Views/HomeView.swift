@@ -3,6 +3,7 @@ import MapKit
 import CoreLocationUI
 import PopupView
 import WebKit
+import Combine
 
 struct HomeView: View {
     @StateObject var locationManager = LocationManager()
@@ -12,6 +13,8 @@ struct HomeView: View {
     @State var toastMessage = ""
     @State var toastStatus = ToastStatus.Success
     @State var showBrowser = false
+    @State var responseCancellable: AnyCancellable?
+    @State var errorCancellable: AnyCancellable?
     
     /**
      Changes the variables toastMessage, showingToast and toastStatus
@@ -81,7 +84,6 @@ struct HomeView: View {
                                     } else {
                                         speechRecognizer.stopVoiceRecognition()
                                         locationManager.getRegionByVoice(speechRecognizer.outputText)
-                                        print("Speech-to-Text: ", speechRecognizer.outputText)
                                     }
                                 }
                             })
@@ -106,13 +108,27 @@ struct HomeView: View {
                             .padding(.vertical, 12)
                             .background(Color.black.opacity(0.3))
                         :
-                        Text(LocalizedStringKey("The Sound of \(locationManager.regionName)"))
-                            .frame(width: geometry.size.width, alignment: .center)
-                            .font(.title2)
-                            .padding(.vertical, 12)
-                            .background(Color.black.opacity(0.3))
+                            Text(LocalizedStringKey("The Sound of \(locationManager.regionName)"))
+                                .frame(width: geometry.size.width, alignment: .center)
+                                .font(.title2)
+                                .padding(.vertical, 12)
+                                .background(Color.black.opacity(0.3))
                         
-                        SongList(requestManager: locationManager.requestManager)
+                        SongList(requestManager: locationManager.requestManager).onAppear {
+                            responseCancellable = locationManager.$response.sink(receiveValue: {
+                              resp in
+                                if(resp?.statusCode != nil && resp?.statusCode != 200) {
+                                    showToastMessage(toastText: "Woops! Something went wrong", status: .Error)
+                                }
+                            })
+                            
+                            errorCancellable = locationManager.$err.sink(receiveValue: {
+                              err in
+                                if(err != nil) {
+                                    showToastMessage(toastText: "Network error!", status: .Error)
+                                }
+                            })
+                        }
                     }
                 }
                 .edgesIgnoringSafeArea(.top)

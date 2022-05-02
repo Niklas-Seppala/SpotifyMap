@@ -48,11 +48,10 @@ struct FetchResponse: Codable {
 class RequestManager: ObservableObject {
     @Published var isLoading = true
     @Published var songs = [FetchSingleSong]()
+    @Published var err = false
     
-    // Fetch songs from the backend  for HomeView and sort them by the newest first
-    func getAreaSongs(area: String) {
-        guard let url = URL(string: "http://10.114.34.4/app/app/location/\"\(area.replacingOccurrences(of: "ä", with: "a").replacingOccurrences(of: " ", with: "-"))\"".replacingOccurrences(of: "\"", with: "")) else {
-            print("invalid url")
+    func getAreaSongs(area: String, completion: @escaping (HTTPURLResponse?, Error?) -> Void) {
+        guard let url = URL(string: "http://10.114.34.4/app/app/location/\"\(area.replacingOccurrences(of: "ä", with: "a"))\"".replacingOccurrences(of: "\"", with: "")) else {
             DispatchQueue.main.async {
                 self.isLoading = false
             }
@@ -61,7 +60,16 @@ class RequestManager: ObservableObject {
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
         DispatchQueue.main.async {
-            URLSession.shared.dataTask(with: request) { (data, response, error) in
+            let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
+                let httpResponse = response as? HTTPURLResponse;
+                guard (error == nil && httpResponse?.statusCode == 200) else {
+                    completion(httpResponse, error)
+                    self.songs = []
+                    DispatchQueue.main.async {
+                        self.isLoading = false
+                    }
+                     return
+                }
                 guard let data = data else {
                     DispatchQueue.main.async {
                         self.isLoading = false
@@ -76,7 +84,8 @@ class RequestManager: ObservableObject {
                     self.songs = response?.songs.sorted(by: { $0.id > $1.id }) ?? []
                     self.isLoading = false
                 }
-            }.resume()
+            }
+            task.resume()
         }
     }
 }
