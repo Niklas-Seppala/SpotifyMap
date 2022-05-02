@@ -23,15 +23,11 @@ class LocationManager: NSObject, ObservableObject,
     @Published var locationManager = CLLocationManager()
     @Published var MapAlertIsPresented = false
     
-    // Gets user's current location and updates it if found, assigns it to the region variable for re-centering the map.
+    // Gets user's current location and updates it if found.
     // Gets user's region name using the resolveRegionName function.
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         guard let location = locations.first else {
             return
-        }
-        
-        DispatchQueue.main.async {
-            self.region = MKCoordinateRegion(center: location.coordinate, span: MapDetails.defaulSpan)
         }
         
         // Assigns region name to regionName variable.
