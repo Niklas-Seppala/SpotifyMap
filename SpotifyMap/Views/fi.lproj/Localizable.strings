@@ -4,9 +4,11 @@
 "Continue as a guest"   = "Jatka vieraana";
 "with limited features" = "rajoitetuille ominaisuuksilla";
 "The Sound of %@"       = "%@ ääni";
-"Please give location permissions to this app in order to locate you." = "Anna sovellukselle sijaintilupa paikantaaksesi sinut.";
+"Please provide location permissions to this app in order to locate you." = "Anna sovellukselle sijaintilupa paikantaaksesi sinut.";
 "Location Alert"        = "Sijaintihälytys";
 "Search"                = "Hae";
 "No songs found in this area" = "Kappaleita ei löytynyt tässä sijainnissa";
 "Showing %d results"    = "Löydetty %d tulosta";
 "Can't detect a region here." = "Aluetta ei voidaan tunnistaa tässä.";
+"Voice Recognition Alert" = "Äänentunnistushälitys";
+"%@" = "Tunnistaja ei ole käytettävissä. Tarkista mikrofonin ja puheentunnistuken käyttöoikeudet.";
