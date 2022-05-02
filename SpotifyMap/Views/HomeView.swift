@@ -13,6 +13,10 @@ struct HomeView: View {
     @State var toastStatus = ToastStatus.Success
     @State var showBrowser = false
     
+    /**
+     Changes the variables toastMessage, showingToast and toastStatus
+     This enables the toast message to pop down from the top
+    */
     func showToastMessage(toastText: String, status: ToastStatus) {
         toastMessage = toastText
         showingToast = true
@@ -29,6 +33,7 @@ struct HomeView: View {
                             Map(coordinateRegion: $locationManager.region, showsUserLocation: true)
                                 .frame(height: geometry.size.height - 390)
                                 .popup(isPresented:$showingToast, type:.toast, position: .top, autohideIn: 10.0) {
+                                    // add modifier to the Map view so the Toast pops from the top of it
                                     createTopToast(toastText: toastMessage, status: toastStatus)
                                 }
                                 .onAppear {
