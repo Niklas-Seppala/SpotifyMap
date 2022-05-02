@@ -14,3 +14,5 @@
 "%@" = "Puheentunnistusta ei voitu ottaa käyttöön. Tarkista mikrofonin ja puheentunnistuken käyttöluvat.";
 "Cancel"                 = "Peruuta";
 "Close"                  = "Sulje";
+
+"Connected with Spotify" = "Spotify tili yhdistetty";
