@@ -56,7 +56,10 @@ struct SongCard: View {
                     .frame(width: 40, height: 40)
                     // Open track in Spotify web view.
                     .sheet(isPresented: $showSpotifySheet) {
-                        Button("Close") { showSpotifySheet = false }.padding()
+                        Button(LocalizedStringKey("Close")) {
+                            showSpotifySheet = false
+                        }
+                        .padding()
                         SpotifyTrackWebView(track: songId)
                     }
                     .onTapGesture {

@@ -12,3 +12,5 @@
 "Can't detect a region here." = "Aluetta ei tunnistettu";
 "Voice Recognition Alert" = "Äänentunnistuksen käyttölupapyyntö";
 "%@" = "Puheentunnistusta ei voitu ottaa käyttöön. Tarkista mikrofonin ja puheentunnistuken käyttöluvat.";
+"Cancel"                 = "Peruuta";
+"Close"                  = "Sulje";
