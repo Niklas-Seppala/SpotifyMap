@@ -5,6 +5,7 @@ struct LandingView: View {
     
     var body: some View {
         VStack {
+            Spacer()
             Text("LOGO")
                 .font(.system(size: 60))
             Spacer()
@@ -13,14 +14,6 @@ struct LandingView: View {
             Spacer()
             VisitorAuthButton()
             Spacer()
-        }
-    }
-}
-
-struct LandingView_Previews: PreviewProvider {
-    static var previews: some View {
-        NavigationView {
-            LandingView()
         }
     }
 }
