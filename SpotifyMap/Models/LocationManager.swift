@@ -21,6 +21,8 @@ class LocationManager: NSObject, ObservableObject,
     @Published var regionName = ""
     @Published var requestManager = RequestManager()
     @Published var locationManager = CLLocationManager()
+    @Published var err: Error? = nil
+    @Published var response: HTTPURLResponse? = nil
     @Published var MapAlertIsPresented = false
     
     // Gets user's current location and updates it if found.
@@ -34,7 +36,10 @@ class LocationManager: NSObject, ObservableObject,
         // Gets the songs for the resolved region.
         resolveRegionName(with: location) { [weak self] locationName in
             self?.regionName = locationName ?? ""
-            self?.requestManager.getAreaSongs(area: locationName ?? "Unknown")
+            self?.requestManager.getAreaSongs(area: locationName ?? "Unknown"){
+                resp, error in
+                    self?.requestCompletion(resp: resp, error: error)
+            }
         }
     }
     
@@ -51,13 +56,23 @@ class LocationManager: NSObject, ObservableObject,
         }
     }
     
+    func requestCompletion(resp: HTTPURLResponse?, error: Error?) {
+        DispatchQueue.main.async {
+            self.response = resp;
+            self.err = error
+        }
+    }
+    
     // Gets the region name of the center of the map using the resolveRegionName function
     // and the region songs using getAreSongs function.
     func getCenterLocation() {
         let location = CLLocation(latitude: region.center.latitude, longitude: region.center.longitude)
         resolveRegionName(with: location) { [weak self] locationName in
             self?.regionName = locationName ?? ""
-            self?.requestManager.getAreaSongs(area: locationName ?? "Unknown")
+            self?.requestManager.getAreaSongs(area: locationName ?? "Unknown") {
+                resp, error in
+                    self?.requestCompletion(resp: resp, error: error)
+            }
         }
     }
     
@@ -85,7 +100,10 @@ class LocationManager: NSObject, ObservableObject,
             
             resolveRegionName(with: location) { [weak self] locationName in
                 self?.regionName = locationName ?? ""
-                self?.requestManager.getAreaSongs(area: locationName ?? "Unknown")
+                self?.requestManager.getAreaSongs(area: locationName ?? "Unknown"){
+                    resp, error in
+                        self?.requestCompletion(resp: resp, error: error)
+                }
             }
             
         @unknown default:
@@ -120,7 +138,10 @@ class LocationManager: NSObject, ObservableObject,
                 
                 self?.region = MKCoordinateRegion(center: locationCoords, span: MapDetails.defaulSpan)
                 self?.regionName = locationName
-                self?.requestManager.getAreaSongs(area: locationName)
+                self?.requestManager.getAreaSongs(area: locationName){
+                    resp, error in
+                        self?.requestCompletion(resp: resp, error: error)
+                }
             }
 
         }
