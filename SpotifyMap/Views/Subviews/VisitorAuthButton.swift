@@ -2,7 +2,7 @@ import SwiftUI
 
 struct VisitorAuthButton: View {
     @EnvironmentObject var authManager: AuthManager
-
+    
     private func delayRedirect() async {
         try? await Task.sleep(nanoseconds: 150000000)
     }

@@ -54,7 +54,7 @@ struct SongCard: View {
                     .resizable()
                     .scaledToFit()
                     .frame(width: 40, height: 40)
-                    // Open track in Spotify web view.
+                // Open track in Spotify web view.
                     .sheet(isPresented: $showSpotifySheet) {
                         Button(LocalizedStringKey("Close")) {
                             showSpotifySheet = false
@@ -79,6 +79,7 @@ struct SongList: View {
     
     var body: some View {
         if (!requestManager.isLoading) {
+            // Display songs in a horizontal list
             if(requestManager.songs.count > 0) {
                 ScrollView (.horizontal, showsIndicators: false) {
                     HStack {

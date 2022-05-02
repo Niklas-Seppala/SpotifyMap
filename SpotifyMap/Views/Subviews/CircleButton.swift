@@ -1,12 +1,13 @@
 import SwiftUI
 
+// Custom floating button component with absolute positioning
 struct CircleButton<T: View> : View {
     let xOffset: CGFloat
     let yOffset: CGFloat
     var content: () -> T
     var action: () -> Void
     
-
+    
     init(xOffset: CGFloat, yOffset: CGFloat, action: @escaping () -> Void, @ViewBuilder content: @escaping () -> T) {
         self.content = content
         self.xOffset = xOffset

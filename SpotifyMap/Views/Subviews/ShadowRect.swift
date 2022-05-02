@@ -3,7 +3,7 @@ import SwiftUI
 struct ShadowRect<T: View> : View {
     let height: CGFloat
     var content: () -> T
-        
+    
     init(height: CGFloat, @ViewBuilder content: @escaping () -> T) {
         self.content = content
         self.height = height

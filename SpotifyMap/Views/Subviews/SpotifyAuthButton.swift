@@ -27,7 +27,7 @@ struct SpotifyAuthButton: View {
             ShadowRect(height: 230) {
                 Text(LocalizedStringKey("Connect your"))
                     .font(.system(size: 30))
-                    
+                
                 Image("SpotifyLogo")
                     .resizable()
                     .scaledToFit()

@@ -1,5 +1,9 @@
 import SwiftUI
 
+/**
+ This view is shown when a user chooses a song from the search results
+ After the user clicks the Confirm button, an API call will be made to add the selected song to the database
+ */
 struct ConfirmSheetView: View {
     @Environment(\.dismiss) var dismiss
     var id: String
@@ -35,8 +39,8 @@ struct ConfirmSheetView: View {
                 SongCard(songName: songName, artist: artist, albumName: albumName, thumbnail: thumbnail, songId: id)
                     .padding(.bottom, 30)
                 Button(action: {
+                    // Add the song to the location, then navigate back to SearchView
                     addSongToLocation(locationId: LocationVariables.currentLocationId, spotifySongId: id) {finished in
-                        print(finished.msg)
                         dismiss()
                     }}) {
                         Text("Confirm")
@@ -51,7 +55,9 @@ struct ConfirmSheetView: View {
     }
 }
 
-
+/**
+ View for each individual search result
+ */
 struct SearchCard: View {
     var id: String
     var songName: String
@@ -104,6 +110,7 @@ struct SearchCard: View {
         .background(Color.black.opacity(0.3))
         .cornerRadius(10)
         .onTapGesture {
+            // When the user chooses a song, they will be redirected to the confirmation page
             showingSheet.toggle()
         }
         .sheet(isPresented: $showingSheet) {
@@ -112,7 +119,9 @@ struct SearchCard: View {
     }
 }
 
-
+/**
+ In this view, the user can search for songs using voice recognition or the search field
+ */
 struct SearchView: View {
     @StateObject var speechRecognizer = SpeechRecognizer()
     @State var searchText = ""
