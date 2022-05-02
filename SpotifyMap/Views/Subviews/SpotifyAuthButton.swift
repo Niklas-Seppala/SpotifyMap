@@ -24,7 +24,7 @@ struct SpotifyAuthButton: View {
     
     private struct SpotifyButtonStyle: ButtonStyle {
         func makeBody(configuration: Self.Configuration) -> some View {
-            ShadowRect(height: 250) {
+            ShadowRect(height: 230) {
                 Text(LocalizedStringKey("Connect your"))
                     .font(.system(size: 30))
                     

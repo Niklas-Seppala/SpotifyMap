@@ -6,8 +6,11 @@ struct LandingView: View {
     var body: some View {
         VStack {
             Spacer()
-            Text("LOGO")
-                .font(.system(size: 60))
+            Image("AppLogo")
+                .resizable()
+                .scaledToFit()
+                .frame(width: 250, height: 50)
+                .padding(.bottom, 30)
             Spacer()
             SpotifyAuthButton()
             Spacer()
