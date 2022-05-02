@@ -57,7 +57,6 @@ class LocationManager: NSObject, ObservableObject,
     }
     
     func requestCompletion(resp: HTTPURLResponse?, error: Error?) {
-        print("There is an error! \(error) and the response is \(resp?.statusCode)")
         //self?.err = error
         DispatchQueue.main.async {
             

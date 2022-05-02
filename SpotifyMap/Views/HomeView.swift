@@ -124,7 +124,6 @@ struct HomeView: View {
                             responseCancellable = locationManager.$response.sink(receiveValue: {
                               resp in
                                 if(resp?.statusCode != nil && resp?.statusCode != 200) {
-                                    print("homeview resp sink code \(resp)")
                                     // TODO: Localize
                                     showToastMessage(toastText: "Server error!", status: .Error)
                                 }
@@ -132,9 +131,7 @@ struct HomeView: View {
                             
                             errorCancellable = locationManager.$err.sink(receiveValue: {
                               err in
-                                print("receive error sink \(err)")
                                 if(err != nil) {
-                                    print("homeview error sink code \(err) not nil \(err != nil)")
                                     // TODO: Localize
                                     showToastMessage(toastText: "Network error!", status: .Error)
                                 }

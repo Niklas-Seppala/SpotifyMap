@@ -66,8 +66,6 @@ class RequestManager: ObservableObject {
             let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
                 let httpResponse = response as? HTTPURLResponse;
                 
-                print("response code \(httpResponse?.statusCode) is it 200? \(httpResponse?.statusCode == 200)")
-                print("Error? \(error)")
                 guard (error == nil && httpResponse?.statusCode == 200) else {
                     print("Running completion")
                     completion(httpResponse, error)
