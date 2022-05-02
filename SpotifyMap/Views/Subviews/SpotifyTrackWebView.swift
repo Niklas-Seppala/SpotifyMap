@@ -1,8 +1,10 @@
 import SwiftUI
 import WebKit
 
-// View component that opens a web view for specified
-// Spotify track. Does not need Spotify OAuth token.
+/**
+ View component that opens a web view for specified
+ Spotify track. Does not need Spotify OAuth token.
+*/
 struct SpotifyTrackWebView: UIViewRepresentable {
     let track: String
     var trackURL: URL? {

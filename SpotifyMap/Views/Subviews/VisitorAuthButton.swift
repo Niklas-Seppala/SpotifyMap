@@ -2,7 +2,7 @@ import SwiftUI
 
 struct VisitorAuthButton: View {
     @EnvironmentObject var authManager: AuthManager
-
+    
     private func delayRedirect() async {
         try? await Task.sleep(nanoseconds: 150000000)
     }
@@ -22,7 +22,7 @@ struct VisitorAuthButton: View {
     
     private struct GuestButtonStyle: ButtonStyle {
         func makeBody(configuration: Self.Configuration) -> some View {
-            ShadowRect(height: 250) {
+            ShadowRect(height: 230) {
                 Text(LocalizedStringKey("Continue as a guest"))
                     .font(.title)
                 Text(LocalizedStringKey("with limited features"))

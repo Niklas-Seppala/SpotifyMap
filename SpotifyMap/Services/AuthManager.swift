@@ -6,11 +6,8 @@ class AuthManager: ObservableObject {
     @Published var isAnonymous = false
     @Published var isLoading = true
     
-    struct Secrets {
-        // For Spotify application.
-        static let CLIENT_ID = "d066f02f40af4ea080a5ee47403f89ca"
-        static let CLIENT_SECRET = ""
-    }
+    var spotifySecret: String
+    var spotifyId: String
     
     struct Keys {
         // For storage.
@@ -20,16 +17,26 @@ class AuthManager: ObservableObject {
     }
     
     init() {
-        self.signIn()
-        //self.signOut() // Uncomment this to clear cache at the startup.
+        guard let id = Bundle.main.infoDictionary?["APP_ID"] as? String else {
+            fatalError("SPOTIFY APP ID IS MISSING")
+        }
+        guard let secret = Bundle.main.infoDictionary?["APP_SECRET"] as? String else {
+            fatalError("SPOTIFY APP SECRET IS MISSING")
+        }
+        
+        spotifyId = id
+        spotifySecret = secret
+        
+        signIn()
+        //signOut() // Uncomment this to clear cache at the startup.
     }
     
     public var signInURL: URL? {
         let scope = "user-library-modify%20user-library-read"
-        let str = "\(SpotifyApi.AUTHENTICATE)?response_type=code&client_id=\(Secrets.CLIENT_ID)&scope=\(scope)&redirect_uri=\(SpotifyApi.REDIRECT)&show_dialog=TRUE"
+        let str = "\(SpotifyApi.AUTHENTICATE)?response_type=code&client_id=\(spotifyId)&scope=\(scope)&redirect_uri=\(SpotifyApi.REDIRECT)&show_dialog=TRUE"
         return URL(string: str)
     }
-
+    
     public func getTokenWithCode(code: String) {
         DispatchQueue.main.async {
             self.isLoading = true
@@ -104,7 +111,7 @@ class AuthManager: ObservableObject {
     }
     
     private var basicAuthBase64: String? {
-        let basicToken = Secrets.CLIENT_ID + ":" + Secrets.CLIENT_SECRET
+        let basicToken = spotifyId + ":" + spotifySecret
         let data = basicToken.data(using: .utf8)
         
         guard let base64 = data?.base64EncodedString() else {
@@ -144,7 +151,7 @@ class AuthManager: ObservableObject {
             let data = try await URLSession.shared.data(for: request)
             print("Received refresh token.")
             let response = try JSONDecoder().decode(AuthResponse.self, from: data.0)
-        
+            
             // Cache the token and return.
             self.cacheToken(response: response)
         } catch {

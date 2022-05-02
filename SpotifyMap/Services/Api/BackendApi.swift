@@ -27,13 +27,13 @@ struct AlbumImage: Codable {
     let width: Int
     let url: String
 }
-
+//Get the song from the backend api to list them
 func getSearchSongs(search: String, finished: @escaping ([Song]) -> Void) {
-    
+    //make sure it will not search for empty string it could give a error
     if (search.isEmpty || search.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty){
         finished([])
     } else {
-        
+        //make sure its a proper url so it will not give an error code for being wrong
         let url = search.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)
         let backendUrl = URL(string: ("http://10.114.34.4/app/songs/search/\(url ?? "no")"))!
         
@@ -55,7 +55,7 @@ func getSearchSongs(search: String, finished: @escaping ([Song]) -> Void) {
 struct GenericApiResponse: Codable {
     let msg: String
 }
-
+// add songs to the current area you are in
 func addSongToLocation(locationId: Int, spotifySongId: String, finished: @escaping (_ response: GenericApiResponse) -> Void) {
     
     if (spotifySongId.isEmpty){

@@ -3,7 +3,7 @@ import Foundation
 struct SpotifyApi {
     static let AUTHENTICATE = "https://accounts.spotify.com/authorize"
     static let TOKEN_REQUEST = "https://accounts.spotify.com/api/token"
-    static let REDIRECT = "https://github.com/Niklas-Seppala/SpotifyMap"
+    static let REDIRECT = "http://localhost:8080"
     
     static func USERS_TRACK(songId: String) -> String {
         return "https://api.spotify.com/v1/me/tracks?ids=\(songId)"

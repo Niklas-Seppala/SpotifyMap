@@ -5,22 +5,18 @@ struct LandingView: View {
     
     var body: some View {
         VStack {
-            Text("LOGO")
-                .font(.system(size: 60))
+            Spacer()
+            Image("AppLogo")
+                .resizable()
+                .scaledToFit()
+                .frame(width: 250, height: 50)
+                .padding(.bottom, 30)
             Spacer()
             SpotifyAuthButton()
             Spacer()
             Spacer()
             VisitorAuthButton()
             Spacer()
-        }
-    }
-}
-
-struct LandingView_Previews: PreviewProvider {
-    static var previews: some View {
-        NavigationView {
-            LandingView()
         }
     }
 }

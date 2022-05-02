@@ -17,17 +17,17 @@ struct SpotifyAuthButton: View {
         }
         .buttonStyle(SpotifyButtonStyle())
         .sheet(isPresented: $displayWeb) {
-            Button("Cancel") { displayWeb = false }.padding(.top)
-            SpotifyAuthView(authManager: authManager)
+            Button(LocalizedStringKey("Cancel")) { displayWeb = false }.padding(.top)
+            SpotifyAuthView()
         }
     }
     
     private struct SpotifyButtonStyle: ButtonStyle {
         func makeBody(configuration: Self.Configuration) -> some View {
-            ShadowRect(height: 250) {
+            ShadowRect(height: 230) {
                 Text(LocalizedStringKey("Connect your"))
                     .font(.system(size: 30))
-                    
+                
                 Image("SpotifyLogo")
                     .resizable()
                     .scaledToFit()

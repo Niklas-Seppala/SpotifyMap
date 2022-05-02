@@ -71,6 +71,8 @@
 		6AD68AFC2817016300153E78 /* VisitorAuthButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisitorAuthButton.swift; sourceTree = "<group>"; };
 		6AD68AFE281AFE4100153E78 /* SpotifyFavButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotifyFavButton.swift; sourceTree = "<group>"; };
 		6AD68B00281C40CA00153E78 /* SpotifyTrackWebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotifyTrackWebView.swift; sourceTree = "<group>"; };
+		6AD68B082820346700153E78 /* Config.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Config.xcconfig; sourceTree = "<group>"; };
+		6AD68B09282034E900153E78 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		6AD78A50280573320038D67F /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -115,6 +117,7 @@
 		6AC49684280489D6007EC954 /* SpotifyMap */ = {
 			isa = PBXGroup;
 			children = (
+				6AD68B09282034E900153E78 /* Info.plist */,
 				6A3AC170280D5E88005A80C8 /* Models */,
 				6AC49698280492B8007EC954 /* Utils */,
 				6AC4968B280489D8007EC954 /* Preview Content */,
@@ -122,6 +125,7 @@
 				6AC49693280491F4007EC954 /* Views */,
 				6AC49685280489D6007EC954 /* SpotifyMapApp.swift */,
 				6AC49689280489D8007EC954 /* Assets.xcassets */,
+				6AD68B082820346700153E78 /* Config.xcconfig */,
 			);
 			path = SpotifyMap;
 			sourceTree = "<group>";
@@ -443,6 +447,7 @@
 		};
 		6AC49691280489D8007EC954 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6AD68B082820346700153E78 /* Config.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -454,6 +459,7 @@
 
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = SpotifyMap/Info.plist;
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Please provide location permissions in order to locate you.";
 				INFOPLIST_KEY_NSMicrophoneUsageDescription = "Please provide microphone permission in order to use voice search.";
 				INFOPLIST_KEY_NSSpeechRecognitionUsageDescription = "Please provide speech recognition to use voice search";
@@ -477,6 +483,7 @@
 		};
 		6AC49692280489D8007EC954 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6AD68B082820346700153E78 /* Config.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -486,6 +493,7 @@
 				DEVELOPMENT_TEAM = KLKN859DHX;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = SpotifyMap/Info.plist;
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Please provide location permissions in order to locate you.";
 				INFOPLIST_KEY_NSMicrophoneUsageDescription = "Please provide microphone permission in order to use voice search.";
 				INFOPLIST_KEY_NSSpeechRecognitionUsageDescription = "Please provide speech recognition to use voice search";
