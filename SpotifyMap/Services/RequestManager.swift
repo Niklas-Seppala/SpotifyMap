@@ -51,7 +51,7 @@ class RequestManager: ObservableObject {
     @Published var songs = [FetchSingleSong]()
     @Published var err = false
     
-    func getAreaSongs(area: String, completion: @escaping (Bool) -> Void) {
+    func getAreaSongs(area: String, completion: @escaping (HTTPURLResponse?, Error?) -> Void) {
         guard let url = URL(string: "http://10.114.34.4/app/app/location/\"\(area.replacingOccurrences(of: "ä", with: "a"))\"".replacingOccurrences(of: "\"", with: "")) else {
             print("invalid url")
             DispatchQueue.main.async {
@@ -63,8 +63,13 @@ class RequestManager: ObservableObject {
         request.httpMethod = "POST"
         DispatchQueue.main.async {
             let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
-                guard error == nil else {
-                    completion(true)
+                let httpResponse = response as? HTTPURLResponse;
+                
+                print("response code \(httpResponse?.statusCode) is it 200? \(httpResponse?.statusCode == 200)")
+                print("Error? \(error)")
+                guard (error == nil && httpResponse?.statusCode == 200) else {
+                    print("Running completion")
+                    completion(httpResponse, error)
                     DispatchQueue.main.async {
                         self.isLoading = false
                     }

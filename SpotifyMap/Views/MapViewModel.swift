@@ -14,7 +14,8 @@ class MapViewModel: NSObject, ObservableObject,
     @Published var requestManager = RequestManager()
     @Published var locationManager = CLLocationManager()
     @Published var alertIsPresented = false
-    @Published var err = false
+    @Published var err: Error? = nil
+    @Published var response: HTTPURLResponse? = nil
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         guard let location = locations.first else {
@@ -27,8 +28,9 @@ class MapViewModel: NSObject, ObservableObject,
         
         resolveRegionName(with: location) { [weak self] locationName in
             self?.regionName = locationName ?? ""
-            self?.requestManager.getAreaSongs(area: locationName ?? "Unknown"){error in
-                self?.err = error
+            self?.requestManager.getAreaSongs(area: locationName ?? "Unknown"){
+                resp, error in
+                    self?.requestCompletion(resp: resp, error: error)
             }
         }
     }
@@ -44,13 +46,25 @@ class MapViewModel: NSObject, ObservableObject,
         }
     }
     
+    func requestCompletion(resp: HTTPURLResponse?, error: Error?) {
+        print("There is an error! \(error) and the response is \(resp?.statusCode)")
+        //self?.err = error
+        DispatchQueue.main.async {
+            
+            self.response = resp;
+            self.err = error
+            print("Running dispatchqueue.main.async to set self.response")
+        }
+        
+    }
+    
     func getCenterLocation() {
         let location = CLLocation(latitude: region.center.latitude, longitude: region.center.longitude)
         resolveRegionName(with: location) { [weak self] locationName in
             self?.regionName = locationName ?? ""
-            self?.requestManager.getAreaSongs(area: locationName ?? "Unknown"){error in
-                self?.err = error
-                
+            self?.requestManager.getAreaSongs(area: locationName ?? "Unknown") {
+                resp, error in
+                    self?.requestCompletion(resp: resp, error: error)
             }
         }
     }
@@ -74,8 +88,9 @@ class MapViewModel: NSObject, ObservableObject,
             
             resolveRegionName(with: location) { [weak self] locationName in
                 self?.regionName = locationName ?? ""
-                self?.requestManager.getAreaSongs(area: locationName ?? "Unknown"){error in
-                    self?.err = error
+                self?.requestManager.getAreaSongs(area: locationName ?? "Unknown"){
+                    resp, error in
+                        self?.requestCompletion(resp: resp, error: error)
                 }
             }
             
