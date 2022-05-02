@@ -115,6 +115,7 @@ struct SearchCard: View {
 
 
 struct SearchView: View {
+    @StateObject var speechRecognizer = SpeechRecognizer()
     @State var searchText = ""
     @State var songs: [Song]
     @State var showingToast = true
@@ -127,32 +128,67 @@ struct SearchView: View {
             GeometryReader { geometry in
                 VStack(alignment: .leading) {
                     HStack {
-                        Image(systemName: "magnifyingglass")
-                            .padding(.leading, 12)
-                            .font(.system(size: 18))
-                        TextField("Search", text: $searchText)
-                            .font(.system(size: 18))
-                            .disableAutocorrection(true)
-                            .onChange(of: searchText, perform: {value in
-                                getSearchSongs(search: searchText) {result in
-                                    songs = result
-                                }
-                            })
-                        if (!searchText.isEmpty) {
-                            Image(systemName: "xmark")
+                        // Search field view.
+                        HStack {
+                            Image(systemName: "magnifyingglass")
+                                .padding(.leading, 12)
                                 .font(.system(size: 18))
-                                .padding(.horizontal, 14)
-                                .frame(alignment: .trailing)
-                                .onTapGesture {
-                                    searchText = ""
+                            TextField("Search", text: $searchText)
+                                .font(.system(size: 18))
+                                .disableAutocorrection(true)
+                                .onChange(of: searchText, perform: {value in
+                                    getSearchSongs(search: searchText) {result in
+                                        songs = result
+                                    }
+                                })
+                                .onDisappear {
+                                    speechRecognizer.stopVoiceRecognition()
                                 }
+                            if (!searchText.isEmpty) {
+                                Image(systemName: "xmark")
+                                    .font(.system(size: 18))
+                                    .padding(.horizontal, 14)
+                                    .frame(alignment: .trailing)
+                                    .onTapGesture {
+                                        searchText = ""
+                                    }
+                            }
                         }
+                        .padding(.vertical, 14)
+                        .overlay(
+                            RoundedRectangle(cornerRadius: 12)
+                                .stroke(Color.white, lineWidth: 1))
+                        // Button that toggles voice recognition and assigns the outputText to
+                        // the search field. Shows an alert if there are any errors.
+                        Button(action: {
+                            withAnimation(.spring(response: 0.4, dampingFraction: 0.3, blendDuration: 0.3)){
+                                speechRecognizer.isRecording.toggle()
+                                if speechRecognizer.isRecording {
+                                    speechRecognizer.reset()
+                                    speechRecognizer.startVoiceRecognition()
+                                } else {
+                                    speechRecognizer.stopVoiceRecognition()
+                                    searchText = speechRecognizer.outputText
+                                    print("Speech-to-Text: ", speechRecognizer.outputText)
+                                }
+                            }
+                        })
+                        {
+                            Image(systemName: "waveform")
+                                .resizable()
+                                .frame(width: 30, height: 30)
+                                .foregroundColor(.white)
+                                .background(speechRecognizer.isRecording ? Circle().foregroundColor(.red).frame(width: 65, height: 65) : Circle().foregroundColor(Color(hex: 0x461c73)).frame(width: 50, height: 50))
+                        }
+                        .alert(isPresented: $speechRecognizer.VoiceAlertIsPresented, content: {
+                            Alert(title: Text(LocalizedStringKey("Voice Recognition Alert")),
+                                  message: Text(LocalizedStringKey("\(speechRecognizer.alertMessage)")),
+                                  dismissButton: .default(Text("OK")))
+                        })
+                        .padding(8)
                     }
-                    .padding(.vertical, 14)
-                    .overlay(
-                        RoundedRectangle(cornerRadius: 12)
-                            .stroke(Color.white, lineWidth: 1))
-                    
+                    // If text is inserted to the text field show the results count and render
+                    // a SearchCard component for each song that is found.
                     if(!searchText.isEmpty) {
                         Text(LocalizedStringKey("Showing \(songs.count) results"))
                             .padding(.vertical, 6)
@@ -180,5 +216,11 @@ struct SearchView: View {
         .popup(isPresented:$showingToast, type:.toast, position: .top, autohideIn: 10.0) {
             createTopToast(toastText: toastMessage, status: toastStatus)
         }
+    }
+}
+
+struct SearchView_Preview: PreviewProvider {
+    static var previews: some View {
+        SearchView(songs: [])
     }
 }
