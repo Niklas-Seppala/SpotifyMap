@@ -34,7 +34,7 @@ struct HomeView: View {
                                 .frame(height: geometry.size.height - 390)
                                 .popup(isPresented:$showingToast, type:.toast, position: .top, autohideIn: 10.0) {
                                     // add modifier to the Map view so the Toast pops from the top of it
-                                    createTopToast(toastText: toastMessage, status: toastStatus)
+                                    Toast(toastText: toastMessage, status: toastStatus)
                                 }
                                 .onAppear {
                                     locationManager.requestLocation()
@@ -119,7 +119,7 @@ struct HomeView: View {
                 .navigationBarBackButtonHidden(true)
             }
         }
-        .task {
+        .onAppear {
             if authManager.isSignedIn {
                 showToastMessage(toastText: "Connected with Spotify", status: .Success)
             }
