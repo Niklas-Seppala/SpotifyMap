@@ -449,7 +449,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"SpotifyMap/Preview Content\"";
-				DEVELOPMENT_TEAM = 656Y3SMLHU;
+				DEVELOPMENT_TEAM = KLKN859DHX;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Please provide location permissions in order to locate you.";
@@ -481,7 +481,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"SpotifyMap/Preview Content\"";
-				DEVELOPMENT_TEAM = 656Y3SMLHU;
+				DEVELOPMENT_TEAM = KLKN859DHX;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Please provide location permissions in order to locate you.";
