@@ -29,7 +29,7 @@ class AuthManager: ObservableObject {
         let str = "\(SpotifyApi.AUTHENTICATE)?response_type=code&client_id=\(Secrets.CLIENT_ID)&scope=\(scope)&redirect_uri=\(SpotifyApi.REDIRECT)&show_dialog=TRUE"
         return URL(string: str)
     }
-
+    
     public func getTokenWithCode(code: String) {
         DispatchQueue.main.async {
             self.isLoading = true
@@ -144,7 +144,7 @@ class AuthManager: ObservableObject {
             let data = try await URLSession.shared.data(for: request)
             print("Received refresh token.")
             let response = try JSONDecoder().decode(AuthResponse.self, from: data.0)
-        
+            
             // Cache the token and return.
             self.cacheToken(response: response)
         } catch {

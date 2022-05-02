@@ -49,8 +49,9 @@ class RequestManager: ObservableObject {
     @Published var isLoading = true
     @Published var songs = [FetchSingleSong]()
     
+    // Fetch songs from the backend  for HomeView and sort them by the newest first
     func getAreaSongs(area: String) {
-        guard let url = URL(string: "http://10.114.34.4/app/app/location/\"\(area.replacingOccurrences(of: "ä", with: "a"))\"".replacingOccurrences(of: "\"", with: "")) else {
+        guard let url = URL(string: "http://10.114.34.4/app/app/location/\"\(area.replacingOccurrences(of: "ä", with: "a").replacingOccurrences(of: " ", with: "-"))\"".replacingOccurrences(of: "\"", with: "")) else {
             print("invalid url")
             DispatchQueue.main.async {
                 self.isLoading = false
@@ -69,7 +70,9 @@ class RequestManager: ObservableObject {
                 }
                 let response = try? JSONDecoder().decode(FetchResponse.self, from: data)
                 DispatchQueue.main.async {
+                    // Update the global variable (will be required for adding a song)
                     LocationVariables.currentLocationId = response?.id ?? 0
+                    // Sort songs by newest
                     self.songs = response?.songs.sorted(by: { $0.id > $1.id }) ?? []
                     self.isLoading = false
                 }

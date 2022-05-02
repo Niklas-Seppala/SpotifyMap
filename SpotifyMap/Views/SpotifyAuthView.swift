@@ -20,7 +20,7 @@ struct SpotifyAuthView: UIViewRepresentable {
     
     class Coordinator: NSObject, WKNavigationDelegate {
         let parent: SpotifyAuthView
-
+        
         init(_ parent: SpotifyAuthView) {
             self.parent = parent
         }

@@ -16,7 +16,7 @@ struct HomeView: View {
     /**
      Changes the variables toastMessage, showingToast and toastStatus
      This enables the toast message to pop down from the top
-    */
+     */
     func showToastMessage(toastText: String, status: ToastStatus) {
         toastMessage = toastText
         showingToast = true
@@ -48,8 +48,8 @@ struct HomeView: View {
                         CircleButton(xOffset: geometry.size.width - 38, yOffset: -165, action: {
                             locationManager.getCenterLocation()
                         }) {
-                                Image(systemName: "pin")
-                                    .font(.system(size: 28))
+                            Image(systemName: "pin")
+                                .font(.system(size: 28))
                         }
                         CircleButton(xOffset: geometry.size.width - 38, yOffset: -104, action: {
                             locationManager.checkLocationAuthorization()
@@ -100,18 +100,18 @@ struct HomeView: View {
                         }
                         // Gets region name fomr locationManager and renders it if found
                         locationManager.regionName == "" ?
-                            Text(LocalizedStringKey("Can't detect a region here."))
-                                .frame(width: geometry.size.width, alignment: .center)
-                                .font(.title2)
-                                .padding(.vertical, 12)
-                                .background(Color.black.opacity(0.3))
+                        Text(LocalizedStringKey("Can't detect a region here."))
+                            .frame(width: geometry.size.width, alignment: .center)
+                            .font(.title2)
+                            .padding(.vertical, 12)
+                            .background(Color.black.opacity(0.3))
                         :
-                            Text(LocalizedStringKey("The Sound of \(locationManager.regionName)"))
-                                .frame(width: geometry.size.width, alignment: .center)
-                                .font(.title2)
-                                .padding(.vertical, 12)
-                                .background(Color.black.opacity(0.3))
-                    
+                        Text(LocalizedStringKey("The Sound of \(locationManager.regionName)"))
+                            .frame(width: geometry.size.width, alignment: .center)
+                            .font(.title2)
+                            .padding(.vertical, 12)
+                            .background(Color.black.opacity(0.3))
+                        
                         SongList(requestManager: locationManager.requestManager)
                     }
                 }
