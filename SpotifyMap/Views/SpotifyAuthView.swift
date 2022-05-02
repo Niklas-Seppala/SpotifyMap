@@ -2,8 +2,7 @@ import SwiftUI
 import WebKit
 
 struct SpotifyAuthView: UIViewRepresentable {
-    // TODO: Move to environment object pattern.
-    @ObservedObject var authManager: AuthManager
+    @EnvironmentObject var authManager: AuthManager
     
     func makeCoordinator() -> SpotifyAuthView.Coordinator {
         Coordinator(self)
@@ -44,7 +43,7 @@ struct SpotifyAuthView: UIViewRepresentable {
 struct SpotifyAuthView_Previews: PreviewProvider {
     static var previews: some View {
         Background {
-            SpotifyAuthView(authManager: AuthManager())
+            SpotifyAuthView()
         }
     }
 }

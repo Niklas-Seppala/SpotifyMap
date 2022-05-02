@@ -17,8 +17,8 @@ struct SpotifyAuthButton: View {
         }
         .buttonStyle(SpotifyButtonStyle())
         .sheet(isPresented: $displayWeb) {
-            Button("Cancel") { displayWeb = false }.padding(.top)
-            SpotifyAuthView(authManager: authManager)
+            Button(LocalizedStringKey("Cancel")) { displayWeb = false }.padding(.top)
+            SpotifyAuthView()
         }
     }
     
