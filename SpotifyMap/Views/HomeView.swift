@@ -3,6 +3,7 @@ import MapKit
 import CoreLocationUI
 import PopupView
 import WebKit
+import Combine
 
 struct HomeView: View {
     @StateObject var viewModel = MapViewModel()
@@ -11,11 +12,15 @@ struct HomeView: View {
     @State var toastMessage = ""
     @State var toastStatus = ToastStatus.Success
     @State var showBrowser = false
+    @State var responseCancellable: AnyCancellable?
+    @State var errorCancellable: AnyCancellable?
     
     func showToastMessage(toastText: String, status: ToastStatus) {
+        
         toastMessage = toastText
         showingToast = true
         toastStatus = status
+        print("showToastMessage is called msg: \(toastText) show: \(showingToast) status: \(toastStatus)")
     }
     
     var body: some View {
@@ -71,8 +76,33 @@ struct HomeView: View {
                                 .font(.title2)
                                 .padding(.vertical, 12)
                                 .background(Color.black.opacity(0.3))
-                    
-                        SongList(requestManager: viewModel.requestManager)
+                        
+                        SongList(requestManager: viewModel.requestManager).onAppear {
+                            print("SongList onAppear!")
+                            
+                            //showToastMessage(toastText: "onAppear", status: .Error)
+                            responseCancellable = viewModel.$response.sink(receiveValue: {
+                              resp in
+                                if(resp?.statusCode != nil && resp?.statusCode != 200) {
+                                    print("homeview resp sink code \(resp)")
+                                    // TODO: Localize
+                                    showToastMessage(toastText: "Server error!", status: .Error)
+                                }
+                            })
+                            
+                            errorCancellable = viewModel.$err.sink(receiveValue: {
+                              err in
+                                print("receive error sink \(err)")
+                                if(err != nil) {
+                                    print("homeview error sink code \(err) not nil \(err != nil)")
+                                    // TODO: Localize
+                                    showToastMessage(toastText: "Network error!", status: .Error)
+                                }
+                            })
+
+                        }
+
+                        
                     }
                 }
                 .edgesIgnoringSafeArea(.top)
