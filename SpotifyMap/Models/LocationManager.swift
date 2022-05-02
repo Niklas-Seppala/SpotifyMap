@@ -57,14 +57,10 @@ class LocationManager: NSObject, ObservableObject,
     }
     
     func requestCompletion(resp: HTTPURLResponse?, error: Error?) {
-        //self?.err = error
         DispatchQueue.main.async {
-            
             self.response = resp;
             self.err = error
-            print("Running dispatchqueue.main.async to set self.response")
         }
-        
     }
     
     // Gets the region name of the center of the map using the resolveRegionName function

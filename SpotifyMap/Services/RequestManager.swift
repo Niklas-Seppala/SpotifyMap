@@ -45,7 +45,6 @@ struct FetchResponse: Codable {
     }
 }
 
-
 class RequestManager: ObservableObject {
     @Published var isLoading = true
     @Published var songs = [FetchSingleSong]()
@@ -65,15 +64,13 @@ class RequestManager: ObservableObject {
         DispatchQueue.main.async {
             let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
                 let httpResponse = response as? HTTPURLResponse;
-                
                 guard (error == nil && httpResponse?.statusCode == 200) else {
-                    print("Running completion")
                     completion(httpResponse, error)
                     self.songs = []
                     DispatchQueue.main.async {
                         self.isLoading = false
                     }
-                         return
+                     return
                 }
                 guard let data = data else {
                     DispatchQueue.main.async {

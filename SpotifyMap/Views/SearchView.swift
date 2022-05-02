@@ -1,5 +1,4 @@
 import SwiftUI
-import PopupView
 
 /**
  This view is shown when a user chooses a song from the search results
@@ -127,13 +126,9 @@ struct SearchView: View {
     @StateObject var speechRecognizer = SpeechRecognizer()
     @State var searchText = ""
     @State var songs: [Song]
-    @State var showingToast = true
-    @State var toastMessage = ""
-    @State var toastStatus = ToastStatus.Error
     
     var body: some View {
         Background {
-            
             GeometryReader { geometry in
                 VStack(alignment: .leading) {
                     HStack {

@@ -21,11 +21,9 @@ struct HomeView: View {
      This enables the toast message to pop down from the top
      */
     func showToastMessage(toastText: String, status: ToastStatus) {
-        
         toastMessage = toastText
         showingToast = true
         toastStatus = status
-        print("showToastMessage is called msg: \(toastText) show: \(showingToast) status: \(toastStatus)")
     }
     
     var body: some View {
@@ -39,7 +37,7 @@ struct HomeView: View {
                                 .frame(height: geometry.size.height - 390)
                                 .popup(isPresented:$showingToast, type:.toast, position: .top, autohideIn: 10.0) {
                                     // add modifier to the Map view so the Toast pops from the top of it
-                                    createTopToast(toastText: toastMessage, status: toastStatus)
+                                    Toast(toastText: toastMessage, status: toastStatus)
                                 }
                                 .onAppear {
                                     locationManager.requestLocation()
@@ -86,7 +84,6 @@ struct HomeView: View {
                                     } else {
                                         speechRecognizer.stopVoiceRecognition()
                                         locationManager.getRegionByVoice(speechRecognizer.outputText)
-                                        print("Speech-to-Text: ", speechRecognizer.outputText)
                                     }
                                 }
                             })
@@ -118,35 +115,27 @@ struct HomeView: View {
                                 .background(Color.black.opacity(0.3))
                         
                         SongList(requestManager: locationManager.requestManager).onAppear {
-                            print("SongList onAppear!")
-                            
-                            //showToastMessage(toastText: "onAppear", status: .Error)
                             responseCancellable = locationManager.$response.sink(receiveValue: {
                               resp in
                                 if(resp?.statusCode != nil && resp?.statusCode != 200) {
-                                    // TODO: Localize
-                                    showToastMessage(toastText: "Server error!", status: .Error)
+                                    showToastMessage(toastText: "Woops! Something went wrong", status: .Error)
                                 }
                             })
                             
                             errorCancellable = locationManager.$err.sink(receiveValue: {
                               err in
                                 if(err != nil) {
-                                    // TODO: Localize
                                     showToastMessage(toastText: "Network error!", status: .Error)
                                 }
                             })
-
                         }
-
-                        
                     }
                 }
                 .edgesIgnoringSafeArea(.top)
                 .navigationBarBackButtonHidden(true)
             }
         }
-        .task {
+        .onAppear {
             if authManager.isSignedIn {
                 showToastMessage(toastText: "Connected with Spotify", status: .Success)
             }
