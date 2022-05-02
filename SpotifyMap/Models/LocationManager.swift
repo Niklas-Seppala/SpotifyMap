@@ -21,7 +21,6 @@ class LocationManager: NSObject, ObservableObject,
     @Published var regionName = ""
     @Published var requestManager = RequestManager()
     @Published var locationManager = CLLocationManager()
-    @Published var alertIsPresented = false
     @Published var err: Error? = nil
     @Published var response: HTTPURLResponse? = nil
     @Published var MapAlertIsPresented = false
