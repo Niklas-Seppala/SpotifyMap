@@ -12,6 +12,11 @@ Clone the repository and in order to use the app, run the [backend](https://gith
 ```bash
 git clone https://github.com/Niklas-Seppala/SpotifyMap.git
 ```
+Create a Config.xcconfig file at root of the source folder.
+```
+APP_ID = YOUR_SPOTIFY_APP_ID
+APP_SECRET = YOUR_SPOTIFY_APP_SECRET
+```
 
 ## Contributing
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
